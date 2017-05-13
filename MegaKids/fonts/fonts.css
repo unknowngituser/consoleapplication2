@@ -1,0 +1,31 @@
+﻿@font-face {
+    font-family: 'Akrobat-Light';
+    src: url('Akrobat/Akrobat-Light.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Akrobat-SemiBold';
+    src: url('Akrobat/Akrobat-SemiBold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Akrobat-Bold';
+    src: url('Akrobat/Akrobat-Bold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Akrobat-Regular';
+    src: url('Akrobat/Akrobat-Regular.otf') format('opentype'),
+        url('Akrobat/Akrobat-Regular/AkrobatRegular.ttf') format('truetype'),
+        url('Akrobat/Akrobat-Regular/AkrobatRegular.woff') format('woff'),
+        url('Akrobat/Akrobat-Regular/AkrobatRegular.woff') format('woff2'),
+        url('Akrobat/Akrobat-Regular/AkrobatRegular.svg') format('svg'),
+        url('Akrobat/Akrobat-Regular/AkrobatRegular.eot') format('embedded-opentype');
+    
+}
+
+@font-face {
+    font-family: 'Akrobat-ExtraLight';
+    src: url('Akrobat/Akrobat-ExtraLight.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Lobster-Regular';
+    src: url('Lobster/Lobster-Regular.ttf') format('truetype');
+}

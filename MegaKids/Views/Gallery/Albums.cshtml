@@ -1,0 +1,128 @@
+﻿@model MegaKids.IServices.Models.ModelGallery
+@{
+    ViewBag.Title = Model.Album.Name + " - " + @String.Format("{0:dd/MM/yyyy}", Model.Album.CreateDate);
+}
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link href="~/Content/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/admin/pages/css/portfolio.css" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL STYLES -->
+<!-- BEGIN THEME STYLES -->
+<link href="~/Content/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css" />
+<!-- END THEME STYLES -->
+<div class="container-album">
+    <div class="container-zero">
+        <div class="album-photos">
+            <div class="album-head">
+                <h2>@Model.Album.Name @String.Format("{0:d}", Model.Album.CreateDate)</h2>
+            </div>
+            <div class="photos-container">
+                <!-- BEGIN PAGE CONTENT-->
+                <div class="row">
+                    <div class="col-md-12" id="photos-list">
+                        <div class="tabbable-line boxless">
+                            <ul class="nav nav-tabs">
+                                <li>
+                                    <a href="#tab_1" data-toggle="tab">
+                                        4 @Resource.Columns
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="#tab_2" data-toggle="tab">
+                                        3 @Resource.Columns
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab_3" data-toggle="tab">
+                                        2 @Resource.Columns
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane" id="tab_1">
+                                    <!-- BEGIN FILTER -->
+                                    <div class="margin-top-10">
+                                        <div class="row mix-grid">
+                                            @foreach (var photo in Model.Photos)
+                                            {
+                                                <div class="col-md-3 col-sm-4 mix category_1">
+                                                    <div class="mix-inner">
+                                                        <img class="img-responsive" src="~/Content/Images/gallery/albums/@{@Model.Album.Id}/photos/@{@photo.PhotoName}" alt="">
+                                                        <div class="mix-details mix-preview fancybox-button" href="~/Content/Images/gallery/albums/@{@Model.Album.Id}/photos/@{@photo.PhotoName}" title="" data-rel="fancybox-button">
+                                                            @*<h2>@String.Format("{0:d}", photo.CreateDate)</h2>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <!-- END FILTER -->
+                                </div>
+                                <div class="tab-pane active" id="tab_2">
+                                    <!-- BEGIN FILTER -->
+                                    <div class="filter-v1 margin-top-10">
+                                        <div class="row mix-grid thumbnails">
+                                            @foreach (var photo in Model.Photos)
+                                            {
+                                                <div class="col-md-4 col-sm-6 mix category_1">
+                                                    <div class="mix-inner">
+                                                        <img class="img-responsive" src="~/Content/Images/gallery/albums/@{@Model.Album.Id}/photos/@{@photo.PhotoName}" alt="">
+                                                        <div class="mix-details mix-preview fancybox-button" href="~/Content/Images/gallery/albums/@{@Model.Album.Id}/photos/@{@photo.PhotoName}" title="" data-rel="fancybox-button">
+                                                            @*<h2>@String.Format("{0:d}", photo.CreateDate)</h2>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- END FILTER -->
+                                </div>
+                                <div class="tab-pane" id="tab_3">
+                                    <!-- BEGIN FILTER -->
+                                    <div class="filter-v1 margin-top-10">
+                                        <div class="row mix-grid thumbnails">
+                                            @foreach (var photo in Model.Photos)
+                                            {
+                                                <div class="col-md-6 col-sm-6 mix category_1">
+                                                    <div class="mix-inner">
+                                                        <img class="img-responsive" src="~/Content/Images/gallery/albums/@{@Model.Album.Id}/photos/@{@photo.PhotoName}" alt="">
+                                                        <div class="mix-details mix-preview fancybox-button" href="~/Content/Images/gallery/albums/@{@Model.Album.Id}/photos/@{@photo.PhotoName}" title="" data-rel="fancybox-button">
+                                                            @*<h3>@String.Format("{0:d}", photo.CreateDate)</h3>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- END FILTER -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Другие альбомы -->
+                    @Html.Action("RecentAlbumsPartial", "gallery", new { currentAlbum = Model.Album.Id })
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+@section scripts{
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="~/Content/assets/global/plugins/jquery-mixitup/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="~/Content/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="~/Content/assets/admin/pages/scripts/portfolio.js"></script>
+<script>
+jQuery(document).ready(function() {
+   Portfolio.init();
+});
+</script>    
+}
+

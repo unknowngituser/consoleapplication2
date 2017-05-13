@@ -1,0 +1,142 @@
+﻿@model IEnumerable<MegaKids.IServices.Models.ModelServices>
+@{
+    ViewBag.Title = "Управление услугами";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-globe"></i>
+            <a href="@Url.Action("Index", "dashboard", new { Area = "Admin" })">Mega Kids</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Услуги</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Редактирование</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-pencil"></i>Управление услугами
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <a href="@Url.Action("create", "services", new { Area = "Admin" })" class="btn green">
+                                    <i class="fa fa-plus"></i>
+                                    Добавить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th>
+                                Изображение
+                            </th>
+                            <th>
+                                Название
+                            </th>
+                            <th>
+                                Дата добавления
+                            </th>
+                            <th>
+                                Редактирование
+                            </th>
+                            <th>
+                                Удаление
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var services in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="thumbnail" style="margin:0 auto;width:70px;text-align:center;">
+                                        <img src="~/Content/Images/services/@services.Photo" alt="100%x180" width="60" style="display: block;">
+                                    </div>
+                                </td>
+                                <td>
+                                    @services.Title
+                                </td>
+                                <td>
+                                    @services.CreateDate
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("edit","services", new { Area = "Admin", id = services.Id })" class="btn yellow">
+                                        <i class="icon-pencil"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger deleteServices" data-toggle="delete-confirmation" value="@services.Id">
+                                        <i class="icon-trash"></i>
+                                    </button>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+
+
+@section scripts{
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //Подтверждение удаления
+            $('[data-toggle=delete-confirmation]').click(function () {
+                var id = $(this).val();
+                bootbox.confirm("Вы действительно хотите удалить услугу?", function (e) {
+                    if (e) {
+                        deleteServices(id);
+                    }
+                });
+                return false;
+            });
+        });
+        function deleteServices(id) {
+            var formaData = new FormData();
+
+            formaData.append("ServicesId", id);
+            $.ajax({
+                url: '@Url.Action("DeleteServices", "services", new { Area = "Admin" })',
+                type: 'post',
+                contentType: false,
+                processData: false,
+                data: formaData,
+                beforeSend: function () { console.log(id); },
+                success: function (data) {
+                    document.location.href = "@Url.Action("management", "services", new { Area = "Admin" })";
+                    console.log(data);
+                }
+            });
+
+        };
+        $('#site-services').addClass("active open");
+        $('#services-edit').addClass("active");
+    </script>
+}

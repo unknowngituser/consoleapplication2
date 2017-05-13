@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MegaKids.IServices.Models.ModelSlider>
+
+<div class="container-slider">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Индикаторы -->
+        @*<ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            </ol>*@
+
+        <!-- Обложка слайдера -->
+        
+        <div class="carousel-inner" role="listbox">
+            @foreach (var slider in Model)
+            {
+                
+                <div class="item @{if (slider == Model.FirstOrDefault()){<text>active</text> }}">
+                    <img src="~/Content/Images/Slider/@slider.Photo" />
+                    <div class="carousel-caption">
+                        <span class="slider-title">@slider.Title</span>
+                        <span class="slider-text">@slider.Content</span>
+
+                        @*<span class="slider-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae luctus dui. </span>
+                        <span class="slider-text">Ut tincidunt in nibh in volutpat. Nullam nec aliquet mauris. Proin vestibulum nec magna et scelerisque. Sed egestas pellentesque sem. Vestibulum justo nunc, ultrices non erat id, cursus eleifend dolor. Vestibulum accumsan, libero quis cursus porta, elit metus blandit erat, at accumsan sapien magna eget eros. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur nec arcu nisi. </span>*@
+                    </div>
+                </div>
+            }
+            
+        </div>
+
+        <!-- Переключатели -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <img id="left-control" src="~/Content/Images/slider-left.png" />
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <img id="right-control" src="~/Content/Images/slider-right.png" />
+        </a>
+    </div>
+</div>

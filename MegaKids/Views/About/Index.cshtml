@@ -1,0 +1,27 @@
+﻿@model MegaKids.IServices.Models.ModelSeoDescription
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Keywords = Model.Keywords;
+    ViewBag.Description = Model.Description;
+}
+<style type="text/css">
+    .header-menu a#btn-about{
+        background-color: #57abe4;
+    }
+</style>
+
+<div class="container-about">
+    <div class="site-container">
+        <div class="about-content">
+            @*<h1 class="title">@Resource.About_Welcome</h1>
+            <h1 class="title">@Resource.About_CompanyName</h1>
+            <p class="description">
+                @Resource.About_Description
+            </p>*@
+            @Html.Raw(Model.PageContent)
+        </div>
+    </div>
+</div>
+<div class="white-delimiter"></div>
+@Html.Partial("_mapContacts")
+<div class="white-delimiter"></div>

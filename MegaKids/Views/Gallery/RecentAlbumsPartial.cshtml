@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MegaKids.IServices.Models.ModelAlbum>
+<div class="col-md-12 recent-albums">
+    <h2>@Resource.OtherAlbums:</h2>
+    <div class="row mix-grid thumbnails">
+        @foreach (var album in Model)
+        {
+            <div class="col-md-4 col-sm-6 mix">
+                <div class="mix-inner">
+                    <img class="img-responsive" src="~/Content/Images/gallery/albums/@{@album.Id.ToString()}/@{@album.PhotoName.ToString()}" alt="@album.Name">
+                    <a href="@Url.Action("albums","gallery", new { id=album.Id })">
+                        <div class="mix-details" title="Перейти к фотографиям">
+                            <h2>@album.Name</h2>
+                            <h3>@String.Format("{0:d}", album.CreateDate)</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+    }
+    </div>
+</div>

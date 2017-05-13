@@ -1,0 +1,287 @@
+﻿/* Блок кафе */
+
+.cafe-block {
+    background: #FFFFFF url('../Images/cafe-background.jpg') no-repeat center;
+    height:450px;
+}
+
+.cafe-block .cafe-center{
+    width:100%;
+    position:absolute;
+}
+
+.cafe-block .cafe-name {
+    position:relative;
+    top:12px;
+    margin: 0 auto;
+    background-image: url('../Images/cafe-name.png');
+    background-repeat:no-repeat;
+    width:519px;
+    height:342px;
+}
+
+.cafe-block .cafe-text{
+    position:relative;
+    bottom:-16px;
+    text-align:center;
+}
+
+.cafe-block .cafe-text span{
+    
+    font-size:61px;
+    font-family:Lobster-Regular;
+    color:#ffffff;
+}
+
+/* Настройки слайдера */
+
+.container-slider{
+    max-width:1920px;
+    margin:0 auto;
+}
+
+.container-slider .carousel .item {
+  height: 550px;
+}
+
+.container-slider .item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 550px;
+}
+
+#left-control{
+    position: absolute;
+    top: 39.5%;
+    z-index: 5;
+    display: inline-block;
+    left: 90%;
+}
+
+#right-control{
+    position: absolute;
+    top: 39.5%;
+    z-index: 5;
+    display: inline-block;
+    right: 90%;
+}
+
+.slider-title{
+    font-family:Akrobat-Bold;
+    font-size:30px;
+    font-weight:bold;
+    display:block;
+}
+
+.slider-text{
+    font-family:Akrobat-Regular;
+    font-size:20px;
+    font-weight:normal;
+}
+
+.carousel-caption{
+    background-color: rgba(51, 51, 51, 0.66);
+    border-top: 5px solid rgba(0, 113, 184, 0.81);
+    padding: 5px 0 10px 0;
+}
+
+/* Блок с описанием */
+
+.container-home-description{
+    /*position:relative;*/
+    background-color:#F3F3F3;
+    /*height: 590px;*/
+}
+
+.home-description{
+    padding-top:30px;
+    padding-bottom:30px;
+    /*position:relative;*/
+}
+
+.monkey-left {
+    width:250px;
+    height:732px;
+    background: url('../Images/animals/monkeys.png') no-repeat;
+    float:left;
+    display: inline-block;
+    margin: -44px 0 0 -265px;
+}
+
+.monkey-right {
+    width:250px;
+    height:732px;
+    background: url('../Images/animals/monkeys.png') no-repeat;
+    float:right;
+    transform:scale(-1, 1);
+    display:inline-block;
+    margin:-44px -265px 0 0;
+}
+
+.home-description p{
+    font-family:Akrobat-SemiBold;
+    font-size:28px;
+    font-weight:bold;
+    color:#006496;
+}
+
+/* Блок с последними новостями */
+.container-home-last-news{
+    width:1100px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color:#FFFFFF;
+}
+
+.home-last-news-head{
+    height:100px;
+    text-align:center;
+}
+
+.home-last-news-head h2{
+    padding:15px 50px;
+    font:bold 49px Akrobat-Bold;
+    text-transform:uppercase;
+    color:#0a7fba;
+    margin:0;
+    
+    display:inline-block;
+}
+
+.left-hand {
+    position:relative;
+    top:10px;
+    width:63px;
+    height:57px;
+    background: url('../Images/latest-news/left-hand.png') no-repeat;
+    display:inline-block;
+}
+
+.right-hand {
+    position:relative;
+    top:10px;
+    width:63px;
+    height:57px;
+    background: url('../Images/latest-news/right-hand.png') no-repeat;
+    display:inline-block;
+}
+
+.home-last-news-content a {
+    text-decoration:none;
+}
+
+.latest-news-link{
+    background-color:#fbf8f8;
+    display:block;
+    width:250px;
+    height: 400px;
+    overflow:hidden;
+    text-align:center;
+}
+
+.latest-news-link:hover{
+    background-color:#f3f2f2;
+    cursor:pointer;
+}
+
+.latest-news{
+    width:100%;
+    height: 100%;
+}
+
+.home-last-news-content{
+    padding-top: 10px;
+}
+
+.latest-news-last-item{
+    margin-right:0;
+}
+
+.latest-news-image{
+    margin-bottom:7px;
+}
+
+p.latest-news-date{
+    font:bold 18px Akrobat-Light;
+    color:#589bc4;
+    margin-bottom:20px;
+    padding:0 10px;
+}
+
+p.latest-news-title{
+    font:bold 18px Akrobat-Bold;
+    color:#FF1103;
+    padding:0 10px;
+}
+
+.latest-news-content{
+    font:bold 16px Akrobat-SemiBold;
+    color:#589bc4;
+    padding:0 10px;
+}
+
+.watch-more-news{
+    padding-top: 30px;
+    text-align:center;
+}
+
+.watch-more-news a{
+    text-decoration:none;
+    font:normal 25px Akrobat-Light;
+    color:#FFFFFF;
+    background-color:#5893c4;
+    display:inline-block;
+    padding:2px 20px 5px 20px;
+    border: solid 1px #006A98;
+}
+.watch-more-news a:hover{
+    color:#5893c4;
+    background-color:#FFFFFF;
+    border: solid 1px #006A98;
+}
+
+.home-video {
+    text-align:center;
+}
+
+.container-map {
+    width:100%;
+    height:450px;
+    margin:0 auto;
+    background: #F6F6F6 url('../Images/map-background.jpg') no-repeat scroll center top;
+}
+
+.map-marker {
+    width:30px;
+    height:42px;
+    background: url('../Images/map-marker.png') no-repeat;
+}
+
+.map-phone {
+    width:37px;
+    height:38px;
+    background: url('../Images/map-phone.png') no-repeat;
+}
+
+.map-clock {
+    width:39px;
+    height:39px;
+    background: url('../Images/map-clock.png') no-repeat;
+}
+
+.map-contacts{
+    padding-top:25px;
+    text-align:right;
+}
+
+.map-contacts div{
+    display:inline-block;
+    margin-right:15px;
+}
+
+.map-contacts p{
+    font:bold 30px Akrobat-Light;
+    color:#5393c3;
+    letter-spacing:1px;
+}

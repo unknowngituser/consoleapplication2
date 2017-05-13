@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Добавление новости";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-globe"></i>
+            <a href="@Url.Action("Index", "Admin")">Mega Kids</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Новости</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Добавление</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-plus-circle"></i>Добавление новости
+                </div>
+            </div>
+            <div class="portlet-body">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+
+
+@section scripts{
+    <script>
+        $('#site-news').addClass("active open");
+        $('#news-add').addClass("active");
+    </script>
+}
+
+

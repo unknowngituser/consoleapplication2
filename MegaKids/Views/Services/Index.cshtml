@@ -1,0 +1,46 @@
+﻿@model MegaKids.IServices.Models.WebPage.ViewModel
+@{
+    ViewBag.Title = Model.Seo.Title;
+    ViewBag.Keywords = Model.Seo.Keywords;
+    ViewBag.Description = Model.Seo.Description;
+}
+
+<style type="text/css">
+    .header-menu a#btn-services {
+        background-color: #57abe4;
+    }
+</style>
+
+<div class="white-delimiter"></div>
+<div class="services-head">
+    @*<h2>Добро пожаловать в развлекательный центр</h2>
+    <h2>MEGA KIDS!</h2>
+    <h3>услуги центра</h3>*@
+    @Html.Raw(Model.Seo.PageContent)
+</div>
+<div class="white-delimiter-h30"></div>
+<div class="services-content">
+    @foreach (var services in Model.ModelServices)
+    {
+        <div class="services-content-item services-module">
+            <div class="item-image">
+                <img src="~/Content/Images/services/@services.Photo" width="350"/>
+            </div>
+            <h3 class="item-title">@services.Title</h3>
+            <div class="item-text collapse" id="services-item-@services.Id" aria-expanded="false">
+                @Html.Raw(services.Content)
+                
+            </div>
+            <div style="text-align:right;">
+                <button data-target="#services-item-@services.Id" class="read-more-button btn blue collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
+                    @Resource.ReadMore
+                </button>
+            </div>
+        </div>
+    }
+</div>
+<div class="white-delimiter"></div>
+@Html.Partial("_mapContacts")
+<div class="white-delimiter"></div>
+
+

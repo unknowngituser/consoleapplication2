@@ -1,0 +1,337 @@
+﻿@model MegaKids.IServices.Models.WebPage.AlbumLang
+@{
+    ViewBag.Title = "Редактирование альбома";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" />
+<link href="~/Content/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-globe"></i>
+            <a href="@Url.Action("Index", "dashboard", new { Area = "Admin" })">Mega Kids</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Альбомы</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Редактирование</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-pencil"></i>Редактирование альбома
+                </div>
+            </div>
+            <div class="portlet-body">
+                <ul class="nav nav-pills">
+                    <li class="active">
+                        <a href="#RU_tab" data-toggle="tab">
+                            RU
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#RO_tab" data-toggle="tab">
+                            RO
+                        </a>
+                    </li>
+                </ul>
+                <div class="form-body form-horizontal">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="RU_tab">
+                            <div class="form-group form-md-line-input has-success">
+                                <label class="col-md-2 control-label" for="Ru_Title">Название альбома</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" id="Ru_Title" name="Ru_Title" rows="2" placeholder="">@Model.Ru_Title</textarea>
+                                    <div class="form-control-focus">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="RO_tab">
+                            <div class="form-group form-md-line-input has-success">
+                                <label class="col-md-2 control-label" for="Ro_Title">Название альбома</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" id="Ro_Title" name="Ro_Title" rows="2" placeholder="">@Model.Ro_Title</textarea>
+                                    <div class="form-control-focus">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input has-success">
+                            <label class="control-label col-md-2" for="Photo">Фото альбома</label>
+                            <div class="col-md-3">
+                                @if (Model.PhotoName != "" && Model.PhotoName != null)
+                                {
+                                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                            <img src="~/Content/Images/gallery/albums/@Model.Id/@Model.PhotoName" />
+                                        </div>
+                                        <div>
+                                            <span class="btn default btn-file">
+                                                <span class="fileinput-new">
+                                                    Выберите изображение
+                                                </span>
+                                                <span class="fileinput-exists">
+                                                    Изменить
+                                                </span>
+                                                <input type="file" id="PhotoFile" name="PhotoFile">
+                                            </span>
+                                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                Удалить
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                        </div>
+                                        <div>
+                                            <span class="btn default btn-file">
+                                                <span class="fileinput-new">
+                                                    Выберите изображение
+                                                </span>
+                                                <span class="fileinput-exists">
+                                                    Изменить
+                                                </span>
+                                                <input type="file" id="PhotoFile" name="PhotoFile">
+                                            </span>
+                                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                Удалить
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <label class="control-label col-md-offset-1 col-md-1" for="CreateDate">Дата добавления</label>
+                            <div class="col-md-3">
+                                <input class="form-control datetime" value="@Model.CreateDate" id="CreateDate" name="CreateDate" style="width: 250px" type="text">
+                                <span class="help-block">
+                                    Выберите дату
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button type="button" id="Save-Changes" value="@Model.Id" class="btn blue">Сохранить</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input ">
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-10 fileupload-buttonbar">
+                                    <div class="col-lg-5" style="padding:0;">
+                                        <!-- The fileinput-button span is used to style the file input field as button -->
+                                        <span class="btn green fileinput-button">
+                                            <i class="fa fa-plus"></i>
+                                            <span>
+                                                Выбрать файлы...
+                                            </span>
+                                            <input type="file" name="files" id="AlbumFiles" multiple="">
+                                        </span>
+                                        <button type="button" value="@Model.Id" id="UploadFiles" class="btn blue start">
+                                            <i class="fa fa-upload"></i>
+                                            <span>
+                                                Начать загрузку
+                                            </span>
+                                        </button>
+                                        <!-- The global file processing state -->
+                                        <span class="fileupload-process">
+                                        </span>
+                                    </div>
+                                    <!-- The global progress information -->
+                                    <div id="progressBar" class="col-lg-6 fileupload-progress fade">
+                                        <!-- The global progress bar -->
+                                        <div id="progressAnim" class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="height: 20px;margin: 7px 0 0 0;">
+                                            <div class="progress-bar progress-bar-success" style="width:100%;">
+                                                <span id="iconSuccess" class="icon-check" style="display:none; font-size: 20px;color: #26a69a;position: absolute;top: 10px;right: -15px;"></span>
+                                            </div>
+
+                                        </div>
+                                        <!-- The extended global progress information -->
+                                        <div class="progress-extended">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="album-item" style="width:100%;height:80px;background-color:#00ff21;">
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="album-item" style="width:100%;height:80px;background-color:#00ff21;">
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="album-item" style="width:100%;height:80px;background-color:#00ff21;">
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="album-item" style="width:100%;height:80px;background-color:#00ff21;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END PAGE CONTENT-->
+
+
+
+@section scripts{
+    <script src="~/Scripts/moment-with-locales.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+
+    <script type="text/javascript" src="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+
+    <script>
+        $('#site-gallery').addClass("active open");
+        $('#gallery-add').addClass("active");
+    </script>
+
+    <script src="~/Content/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+    <script src="~/Content/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
+
+    <script src="~/Content/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+
+    <script src="~/Scripts/knockout-3.4.2.js"></script>
+    <script>
+    jQuery(document).ready(function () {
+
+        $('.datetime').datetimepicker({
+            locale: 'ru'
+        });
+    });
+    $('#UploadFiles').click(function () {
+        files = document.getElementById('AlbumFiles').files;
+        var data = new FormData();
+        $.each(files, function (i, file) {
+            data.append('file'+i, file);
+        });
+        data.append('AlbumId', $(this).val());
+        //data.append("files", files[0]);
+        $.ajax({
+            beforeSend: function () {
+                console.log('priv');
+                $('#progressAnim').addClass("progress-striped active");
+                $('#progressBar').css("opacity", 1);
+                $('#iconSuccess').hide();
+            },
+
+            url: '@Url.Action("UploadAlbumPhotos", "gallery", new { Area = "Admin" })',
+            type: 'post',
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                console.log(data);
+                $('#iconSuccess').show();
+                $('#progressAnim').removeClass("progress-striped active");
+
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+
+    $('#Save-Changes').click(function () {
+        files = document.getElementById('PhotoFile').files;
+        var data = new FormData();
+        data.append("Id", $(this).val());
+        data.append("Ru_Title", $("#Ru_Title").val());
+        data.append("Ro_Title", $("#Ro_Title").val());
+        data.append("CreateDate", $("#CreateDate").val());
+
+        data.append("PhotoFile", files[0]);
+        $.ajax({
+            url: '@Url.Action("updatealbum", "gallery", new { Area = "Admin" })',
+            type: 'post',
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                document.location.href = "@Url.Action("management","gallery", new { Area = "Admin" })";
+                console.log(data);
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+    </script>
+
+    <script>
+        var Photo = function (data) {
+            var proto = {
+                PhotoName: ''
+            }
+            $.extend(proto, data);
+            var self = this;
+
+            this.PhotoName = ko.observable(proto.PhotoName);
+
+        }
+        
+        var model = {
+            PhotosList: ko.observableArray([]),
+            LoadData: function () {
+                
+                $.ajax({
+                    method: "POST",
+                    //datatype: "json",
+                    processdata: false,
+                    contentType: false,
+                    data: { AlbumId: 1 },
+                    url: '@Url.Action("GetAlbumPhotosJson","Gallery", new { Area = "Admin" })',
+                    success: function (data) {
+                        model.PhotosList.removeAll();
+                        for (var i in data) {
+                            var item = new Photo(data[i]);
+                            model.PhotosList.push(item);
+                        }
+                        console.log('data', model.PhotosList());
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+        };
+        $(function () {
+            ko.applyBindings(model);
+            model.LoadData();
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+}
+
+

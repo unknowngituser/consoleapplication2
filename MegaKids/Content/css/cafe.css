@@ -1,0 +1,114 @@
+﻿.container-cafe{
+    width:1200px;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cafe-head, .cafe-album-head {
+    text-align:center;
+}
+
+.cafe-head h1, .cafe-album-head h1{
+    font: 70px Lobster-Regular;
+    color:#FE2202;
+    margin:0;
+}
+
+.cafe-head h3{
+    font: 42px Lobster-Regular;
+    color:#589bc4;
+    margin:0;
+}
+
+.cafe-icon{
+    display:inline-block;
+    width:94px;
+    height:110px;
+    margin-top: 30px;
+}
+
+#icon-balloons {
+    background: url('../Images/cafe-page/icon-balloons.png') no-repeat;
+}
+
+#icon-clock {
+    background: url('../Images/cafe-page/icon-clock.png') no-repeat;
+}
+
+#icon-smile {
+    background: url('../Images/cafe-page/icon-smile.png') no-repeat;
+}
+
+.cafe-horizontal-line{
+    width:92%;
+    border-bottom: 1px solid #0073BC;
+    padding-top:20px;
+    margin:0 auto 20px auto;
+}
+
+.cafe-album-head h1{
+    margin:40px 0 20px 0;
+}
+
+.carousel-control.left{
+        background-image:none !important;
+        left: -7%;
+    }
+
+.carousel-control.right{
+        background-image:none !important;
+        right: -4.2%;
+    }
+.carousel-control{
+    width: 0;
+}
+
+#photos-list .mix-grid .mix .mix-details {
+    cursor: url('../Images/gallery/cursor-pl.png'), zoom-in !important;
+    background: none !important;
+    height:100% !important;
+}
+
+.slider-arrow-previous {
+    position: absolute;
+    background: url('../Images/arrow-left.png');
+    width: 32px;
+    height: 54px;
+    top: 35%;
+    cursor: pointer;
+}
+
+.slider-arrow-next {
+    position: absolute;
+    background: url('../Images/arrow-right.png');
+    width: 32px;
+    height: 54px;
+    top: 35%;
+    cursor: pointer;
+}
+
+.container-cafe-description{
+    margin-top: 80px;
+    background-color:#F3F3F3;
+    width:100%;
+}
+
+.cafe-description{
+    padding-top: 5px;
+    padding-bottom: 40px;
+    text-align:center;
+}
+
+.cafe-description h1, .cafe-description h2{
+    font: 50px Lobster-Regular;
+    color:#006BA1;
+}
+
+.cafe-description p{
+    font: 25px Akrobat-SemiBold;
+    color:#07759e;
+    line-height: 1.5;
+}
+

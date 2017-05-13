@@ -1,0 +1,31 @@
+﻿.container-about{
+    width: 100%;
+    background: #F3F3F3 no-repeat scroll center top;
+    padding-top:35px;
+    padding-bottom:35px;
+}
+
+
+.about-content{
+    /*text-align:center;*/
+}
+
+.about-content h1{
+    font:bold 55px Akrobat-SemiBold;
+    color:#FF1103;
+    margin:0;
+    margin-bottom: 25px;
+}
+
+.about-content h3.description-name{
+    font:bold 35px Akrobat-Bold;
+    color:#0a7fba;
+    text-transform:uppercase;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.about-content p{
+    font:normal 35px Akrobat-Regular;
+    color:#589bc4;
+}

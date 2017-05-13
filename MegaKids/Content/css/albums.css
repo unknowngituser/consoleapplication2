@@ -1,0 +1,28 @@
+﻿
+
+.album-head, .recent-albums{
+    text-align:center;
+}
+
+.album-head h2, .recent-albums h2{
+    font:bold 30px Akrobat-SemiBold;
+    color:#0a7fba;
+    display:inline-block;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.recent-albums{
+    margin-bottom:30px;
+}
+
+.mix-details h2, .mix-details h3{
+    font:bold 30px Akrobat-Bold;
+    color:#ffffff;
+    text-transform: uppercase;
+}
+
+.mix-details h2{
+    margin-top: 25%;
+    margin-bottom: 0;
+}

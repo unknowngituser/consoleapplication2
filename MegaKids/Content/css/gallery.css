@@ -1,0 +1,50 @@
+﻿
+
+.container-gallery{
+    text-align:center;
+}
+
+.container-gallery h2{
+    font:bold 35px Akrobat-Bold;
+    color:#0a7fba;
+    text-transform:uppercase;
+    display:inline-block;
+    margin:30px 0;
+}
+
+.albums-item{
+    float:left;
+    display:inline-block;
+    border: solid 5px #059CC7;
+    margin-right:30px;
+    margin-bottom:25px;
+}
+
+.albums-content .item-last{
+    margin-right:0;
+}
+
+.gallery-albums{
+
+}
+
+.gallery-videos{
+    padding-bottom:80px;
+}
+
+.mix-details h2, .mix-details h3{
+    font:bold 30px Akrobat-Bold;
+    color:#ffffff;
+    text-transform: uppercase;
+}
+
+.mix-details h2{
+    margin-top: 25%;
+    margin-bottom: 0;
+}
+
+#photos-list .mix-grid .mix .mix-details {
+    cursor: url('../Images/gallery/cursor-pl.png'), zoom-in !important;
+    background: none !important;
+    height:100% !important;
+}

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MegaKids.IServices.Models.ModelNews>
+<div class="home-last-news-content">
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var news in Model)
+            {
+                <div class="col-md-3">
+                    <a href="@Url.Action("watchnews","news", new { id = news.Id })" class="latest-news-link">
+                        <div class="latest-news">
+                            <div class="latest-news-image">
+                                <img src="~/Content/Images/NewsImages/@news.Id/@news.Photo" width="250"/>
+                            </div>
+                            <p class="latest-news-date">
+                                @Resource.Added: @String.Format("{0:dd.MM.yyyy}", news.CreateDate)
+                            </p>
+                            <p class="latest-news-title">
+                                @news.Title
+                            </p>
+                            <div class="latest-news-content">
+                                @Html.Raw(news.NewsContent)
+                            </div>
+                        </div>
+                    </a>
+                    
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+

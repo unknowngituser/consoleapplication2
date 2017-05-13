@@ -1,0 +1,162 @@
+﻿@model MegaKids.IServices.Models.ModelSeoDescription
+
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Keywords = Model.Keywords;
+    ViewBag.Description = Model.Description;
+}
+
+<style type="text/css">
+    .header-menu a#btn-news {
+        background-color: #57abe4;
+    }
+</style>
+
+<!-- Блок с новостями -->
+<div class="container-news">
+    <div class="container-zero">
+        <div class="news-head">
+            <h2>
+                @Resource.RecentNews
+                <img id="news-loading" style="display:none;margin: 0 0 10px 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
+            </h2>
+        </div>
+        <div class="news-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- ko foreach: List -->
+                    <div class="col-md-4">
+                        <a data-bind="attr:{href:'/news/watchnews/'+Id()}" class="news-item-link" style="opacity:0;transition: all 600ms ease-in-out;">
+                            <div class="news-item">
+                                <div class="news-item-image">
+                                    <img data-bind="attr:{src:'/Content/Images/NewsImages/'+Id()+'/'+Photo()}" width="345" />
+                                </div>
+                                <p class="news-item-date">
+                                    @Resource.Added: <span data-bind="text:moment(CreateDate()).format('ll')"></span>
+                                </p>
+                                <p class="news-item-title" data-bind="text:Title"></p>
+                                <div class="news-item-content" data-bind="html:NewsContent()"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            
+            
+            <div class="clear"></div>
+        </div>
+        <div class="paging-items">
+            <ul class="pager">
+                <li class="previous">
+                    <a data-bind="click:PrevPage" class="btn blue page-prev">
+                        <i class="fa fa-angle-left"></i> @Resource.Back
+                    </a>
+                </li>
+                <li class="next">
+                    <a data-bind="click:NextPage" class="btn blue page-next">
+                        @Resource.Next <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    @*<div class="watch-more-news">
+        <a href="#" class="btn blue">@Resource.WatchMore</a>
+    </div>*@
+</div>
+
+<!-- Конец блока с новостями -->
+
+@section scripts{
+        <script src="~/Scripts/moment-with-locales.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+
+<script>
+        var Filter = function (data) {
+            var proto = {
+
+                CurrentPage: 1,
+                PageSize: 6,
+                CountPage: 1,
+                CountItems: 0
+            }
+            $.extend(proto, data);
+            var self = this;
+
+            this.CurrentPage = ko.observable(proto.CurrentPage);
+            this.PageSize = ko.observable(proto.PageSize);
+            this.CountPage = ko.observable(proto.CountPage);
+            this.CountItems = ko.observable(proto.CountItems);
+
+        }
+
+        var News = function (data) {
+            var proto = {
+                Id :0,
+                CreateDate: new Date(),
+                Photo: '',
+                Title: '',
+                NewsContent: ''
+            }
+            $.extend(proto, data);
+            var self = this;
+
+            this.Id = ko.observable(proto.Id);
+            this.CreateDate = ko.observable(proto.CreateDate);
+            this.Photo = ko.observable(proto.Photo);
+            this.Title = ko.observable(proto.Title);
+            this.NewsContent = ko.observable(proto.NewsContent);
+
+        }
+
+        var model = {
+
+            List: ko.observableArray([]),
+            FilterTable: ko.observable(new Filter()),
+            LoadData: function () {
+                $("#news-loading").show();
+                var params = ko.toJSON(model.FilterTable());
+                $.ajax({
+                    method: "POST",
+                    datatype: "json",
+                    processData: false,
+                    contentType: "application/json; charset=utf-8",
+                    data: params,
+                    accept: 'application/json',
+                    url: '@Url.Action("GetNewsList", "news")',
+                    success: function (data) {
+                        model.List.removeAll();
+                        for (var i in data.List) {
+                            var item = new News(data.List[i]);
+                            model.List.push(item);
+                        }
+                        model.FilterTable().CountItems(data.CountItems);
+                        model.FilterTable().CountPage(data.CountPage);
+                        setTimeout(function () { $('.news-item-link').css("opacity", 1); }, 500);
+                        $("#news-loading").hide();
+                    }
+                });
+            },
+            NextPage: function () {
+                if (model.FilterTable().CurrentPage() < model.FilterTable().CountPage()) {
+                    model.FilterTable().CurrentPage(model.FilterTable().CurrentPage() + 1);
+                    model.LoadData();
+                }
+            },
+            PrevPage: function () {
+                if (model.FilterTable().CurrentPage() > 1) {
+                    model.FilterTable().CurrentPage(model.FilterTable().CurrentPage() - 1);
+                    model.LoadData();
+                }
+            }
+
+
+        };
+    $(function () {
+        moment.locale('ru');
+            ko.applyBindings(model);
+            model.LoadData();
+        });
+</script>
+}

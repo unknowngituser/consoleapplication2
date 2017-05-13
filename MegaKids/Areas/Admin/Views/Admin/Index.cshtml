@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-globe"></i>
+            <a href="@Url.Action("Index", "dashboard", new { Area = "Admin" })">Mega Kids</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT -->
+<div class="row">
+    <div class="col-md-12">
+
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section scripts{
+    <script>
+        $('#site-global').addClass("active open");
+    </script>  
+}
+

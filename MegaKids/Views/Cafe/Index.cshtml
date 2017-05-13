@@ -1,0 +1,142 @@
+﻿@model MegaKids.IServices.Models.WebPage.ViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutCafe.cshtml";
+    ViewBag.Title = Model.Seo.Title;
+    ViewBag.Keywords = Model.Seo.Keywords;
+    ViewBag.Description = Model.Seo.Description;
+}
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link href="~/Content/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/admin/pages/css/portfolio.css" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL STYLES -->
+<!-- BEGIN THEME STYLES -->
+<link href="~/Content/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css" />
+<!-- END THEME STYLES -->
+<style type="text/css">
+    .header-menu a#btn-cafe {
+        background-color: #57abe4;
+    }
+    
+</style>
+<link rel="stylesheet/less" type="text/css" href="~/Content/css/multi-item-carousel.less" />   
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+<div class="white-delimiter-h30"></div>
+<!-- Блок с описанием -->
+<div class="cafe-page">
+    <div class="container-cafe">
+        <div class="cafe-head row">
+            <h1>@Model.Seo.Title</h1>
+            <div class="cafe-icons col-md-12">
+                <div class="col-md-4 col-sm-6 mix">
+                    <div id="icon-clock" class="cafe-icon"></div>
+                    <h3>10:00 - 22:00</h3>
+                </div>
+                <div class="col-md-4 col-sm-6 mix">
+                    <div id="icon-smile" class="cafe-icon"></div>
+                    <h3>@Resource.Cafe_Menu</h3>
+                </div>
+                <div class="col-md-4 col-sm-6 mix">
+                    <div id="icon-balloons" class="cafe-icon"></div>
+                    <h3>@Resource.Cafe_BirthDays</h3>
+                </div>
+            </div>
+        </div>
+        <div class="cafe-horizontal-line"></div>
+        
+        <div class="container">
+            <div class="row" id="photos-list">
+                @foreach (var album in Model.ModelCafeAlbum)
+                {
+                    if (album.ChildPhotos.Count > 0)
+                    {
+                        <div class="col-md-12">
+                            <div class="cafe-album-head">
+                                <h1>@album.Name</h1>
+                            </div>
+                            <div class="carousel slide multi-item-carousel" id="theSlider-@album.Id">
+                                <div class="carousel-inner">
+                                    @foreach (var photos in album.ChildPhotos)
+                                    {
+                                        <div class="item @{if (photos == album.ChildPhotos.FirstOrDefault()){<text>active</text> }}">
+                                            <div class="mix-grid thumbnails">
+                                                <div class="col-md-4 col-sm-6 mix">
+                                                    <div class="mix-inner">
+                                                        <img class="img-responsive" src="~/Content/Images/cafe-page/albums/@album.Id/photos/@photos.PhotoName" alt="">
+                                                        <div style="cursor:pointer;" class="mix-details mix-preview fancybox-button" href="~/Content/Images/cafe-page/albums/@album.Id/photos/@photos.PhotoName" title="" data-rel="fancybox-button">
+                                                            @*<h2>@photos.CreateDate</h2>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+    }
+
+
+                                    <!--  Example item end -->
+                                </div>
+                                <a class="left carousel-control" href="#theSlider-@album.Id" data-slide="prev">
+                                    <div class="slider-arrow-previous"></div>
+                                    @*<i class="glyphicon glyphicon-chevron-left"></i>*@
+                                </a>
+                                <a class="right carousel-control" href="#theSlider-@album.Id" data-slide="next">
+                                    <div class="slider-arrow-next"></div>
+                                    @*<i class="glyphicon glyphicon-chevron-right"></i>*@
+                                </a>
+                            </div>
+                        </div>
+        }
+    }
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+<div class="container-cafe-description">
+    <div class="container cafe-description">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Raw(Model.Seo.PageContent)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="white-delimiter"></div>
+@Html.Partial("_mapContacts")
+<div class="white-delimiter"></div>
+
+@section scripts{
+<script>
+    // Instantiate the Bootstrap carousel
+    $('.multi-item-carousel').carousel({
+        interval: false
+    });
+
+    // for every slide in carousel, copy the next slide's item in the slide.
+    // Do the same for the next, next item.
+    $('.multi-item-carousel .item').each(function () {
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        if (next.next().length > 0) {
+            next.next().children(':first-child').clone().appendTo($(this));
+        } else {
+            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+        }
+    });
+    </script>
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="~/Content/assets/global/plugins/jquery-mixitup/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="~/Content/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="~/Content/assets/admin/pages/scripts/portfolio.js"></script>
+<script>
+jQuery(document).ready(function() {
+   Portfolio.init();
+});
+</script>  
+}

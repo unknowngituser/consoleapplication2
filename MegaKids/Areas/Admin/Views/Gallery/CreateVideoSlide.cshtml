@@ -1,0 +1,128 @@
+﻿@model MegaKids.IServices.Models.WebPage.SeoLang
+@{
+    ViewBag.Title = "Добавление видео";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style rel="stylesheet" type="text/css">
+    #cke_1_top, #cke_2_top {
+        background: #F8F8F8;
+    }
+
+    .cke_toolgroup {
+        border: none;
+        background: transparent;
+    }
+
+    .cke_button:hover {
+        background: #E5E5E5;
+    }
+</style>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-globe"></i>
+            <a href="@Url.Action("Index", "dashboard", new { Area = "Admin" })">Mega Kids</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Галерея</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Видео</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Добавление</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-plus-circle"></i>Добавление видео
+                </div>
+            </div>
+            <div class="portlet-body">
+                <ul class="nav nav-pills">
+                    <li class="active">
+                        <a href="#RU_tab" data-toggle="tab">
+                            RU
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#RO_tab" data-toggle="tab">
+                            RO
+                        </a>
+                    </li>
+                </ul>
+                @using (Html.BeginForm("createvideoslide", "gallery", new { Area = "Admin" }, FormMethod.Post))
+                {
+                    <div class="form-body form-horizontal">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="RU_tab">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label class="col-md-2 control-label" for="Ru_Title">Название видео</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="Ru_Title" name="Ru_Title" rows="2" placeholder=""></textarea>
+                                        <div class="form-control-focus">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-md-line-input has-success">
+                                    <label class="control-label col-md-2" for="Ru_Video">Видео</label>
+                                    <div class="col-md-10">
+                                        <textarea class="ckeditor form-control" id="Ru_Video" name="Ru_Video" rows="6"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="RO_tab">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label class="col-md-2 control-label" for="Ro_Title">Название видео</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="Ro_Title" name="Ro_Title" rows="2" placeholder=""></textarea>
+                                        <div class="form-control-focus">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-md-line-input has-success">
+                                    <label class="control-label col-md-2" for="Ro_Video">Видео</label>
+                                    <div class="col-md-10">
+                                        <textarea class="ckeditor form-control" id="Ro_Video" name="Ro_Video" rows="6"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input">
+                                <div class="row">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <button type="submit" id="Save-Changes" style="margin-top: 15px;" class="btn blue">Сохранить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+@section scripts{
+
+    <script type="text/javascript" src="~/Content/assets/global/plugins/ckeditor_full/ckeditor.js"></script>
+    <script>
+        $('#site-gallery').addClass("active open");
+        $('#gallery-videos').addClass("active");
+    </script>
+}
+
+
+
+

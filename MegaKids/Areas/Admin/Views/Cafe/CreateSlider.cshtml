@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Добавление слайдера";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" />
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-globe"></i>
+            <a href="@Url.Action("Index", "dashboard", new { Area = "Admin" })">Mega Kids</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Кафе</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Добавление слайдера</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-plus-circle"></i>Добавление слайдера
+                </div>
+            </div>
+            <div class="portlet-body">
+                <ul class="nav nav-pills">
+                    <li class="active">
+                        <a href="#RU_tab" data-toggle="tab">
+                            RU
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#RO_tab" data-toggle="tab">
+                            RO
+                        </a>
+                    </li>
+                </ul>
+                @using (Html.BeginForm("createslider", "cafe", new { Area = "Admin" }, FormMethod.Post))
+                {
+                    <div class="form-body form-horizontal">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="RU_tab">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label class="col-md-2 control-label" for="Ru_Title">Заголовок слайдера</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="Ru_Title" name="Ru_Title" rows="2" placeholder=""></textarea>
+                                        <div class="form-control-focus">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="RO_tab">
+                                <div class="form-group form-md-line-input has-success">
+                                    <label class="col-md-2 control-label" for="Ro_Title">Заголовок слайдера</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="Ro_Title" name="Ro_Title" rows="2" placeholder=""></textarea>
+                                        <div class="form-control-focus">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input">
+                                <div class="row">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <button type="submit" id="Save-Changes" class="btn blue">Перейти к загрузке фото</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+
+
+@section scripts{
+    
+    <script>
+        $('#site-cafe').addClass("active open");
+        $('#cafe-add-slider').addClass("active");
+    </script>
+
+}
+
+
+
+

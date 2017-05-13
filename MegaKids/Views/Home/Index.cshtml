@@ -1,31 +1,68 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model MegaKids.IServices.Models.WebPage.ViewModel
+@using MegaKids.DataModel.Models
+@{
+    ViewBag.Title = Model.Seo.Title;
+    ViewBag.Keywords = Model.Seo.Keywords;
+    ViewBag.Description = Model.Seo.Description;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<!-- Блок кафе -->
+<div class="white-delimiter"></div>
+<a href="@Url.Action("index","cafe")">
+    <div class="cafe-block">
+        <div class="cafe-center">
+            <div class="cafe-name"></div>
+            <div class="cafe-text">
+                <span>@Resource.Cafe_Title</span>
+            </div>
+        </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+</a>
+<!-- Конец блока кафе -->
+<div class="white-delimiter"></div>
+<!-- Слайдер -->
+@Html.Action("SliderPartial", "Modules", new { sitePage = EnumSitePage.Index })
+<!-- Конец слайдера -->
+<div class="white-delimiter"></div>
+<!-- Блок с описанием -->
+<div class="container-home-description">
+    <div class="site-container">
+        <div class="absolute">
+            @*<div class="monkey-left"></div>
+            <div class="monkey-right"></div>*@
+            <div class="home-description">
+                @Html.Raw(Model.Seo.PageContent)
+            </div>
+        </div>
     </div>
 </div>
+<!-- Конец блока с описанием -->
+<!-- Блок с новостями -->
+<div class="container-home-last-news">
+    <div class="home-last-news-head">
+        <div class="left-hand"></div>
+        <h2>
+            @Resource.RecentNews
+        </h2>
+        <div class="right-hand"></div>
+    </div>
+@Html.Action("PartialRecentNews", "home", new { count = 4 })
+    <div class="clear"></div>
+    <div class="watch-more-news">
+        <a href="@Url.Action("index","news")" class="btn blue">@Resource.WatchAllNews</a>
+    </div>
+</div>
+<!-- Конец блока с новостями -->
+<div class="white-delimiter"></div>
+<!-- Блок с видео -->
+<div class="site-container">
+    <div class="home-video">
+        @Html.Raw(Model.Seo.ExtraContent)
+        @*<iframe width="725" height="408" src="https://www.youtube.com/embed/orxXlAltFQg?rel=0" frameborder="0" allowfullscreen></iframe>*@
+    </div>
+</div>
+<!-- Конец блок с видео -->
+<div class="white-delimiter"></div>
+@Html.Partial("_mapContacts")
+<div class="white-delimiter"></div>

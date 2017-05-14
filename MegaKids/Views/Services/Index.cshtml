@@ -18,7 +18,7 @@
     <h3>услуги центра</h3>*@
     @Html.Raw(Model.Seo.PageContent)
 </div>
-<div class="white-delimiter-h30"></div>
+<div class="white-delimiter"></div>
 <div class="services-content">
     @foreach (var services in Model.ModelServices)
     {
@@ -39,7 +39,6 @@
         </div>
     }
 </div>
-<div class="white-delimiter"></div>
 @Html.Partial("_mapContacts")
 <div class="white-delimiter"></div>
 

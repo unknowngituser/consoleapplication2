@@ -24,7 +24,22 @@ CKEDITOR.editorConfig = function( config ) {
     ];
     config.resize_enabled = false;
     config.extraPlugins = 'videoembed,youtube,autogrow';
+    config.autoGrow_onStartup = true;
+
+    config.font_names =
+    'Akrobat/Akrobat-Regular,Akrobat;' +
+    'Akrobat Light/Akrobat-Light,sans-serif;' +
+    'Arial/Arial, Helvetica, sans-serif;' +
+    'Comic Sans MS/comic sans ms,sans-serif;'+
+    'Courier New/courier new,courier,monospace;'+
+    'Georgia/georgia,palatino,serif;'+
+    'Helvetica/helvetica,arial,sans-serif;' +
+    'Lobster/Lobster,Lobster-Regular;'
+    'Tahoma/tahoma,arial,helvetica,sans-serif;'+
+    'Times New Roman/times new roman,times,serif;'+
+    'Verdana/verdana,geneva,sans-serif;';
     
+
     config.removePlugins = 'iframe';
     config.filebrowserUploadUrl = "http://"+window.location.hostname + ':' + window.location.port + "/Admin/News/UploadImage";
 };

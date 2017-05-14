@@ -25,6 +25,8 @@ namespace MegaKids.IServices.Models.WebPage
 
         public string Ru_NewsContent { get; set; }
 
+        public string Ru_PreviewContent { get; set; }
+
         public string Ro_Title { get; set; }
 
         public string Ro_Seo_Keywords { get; set; }
@@ -32,5 +34,7 @@ namespace MegaKids.IServices.Models.WebPage
         public string Ro_Seo_Description { get; set; }
 
         public string Ro_NewsContent { get; set; }
+
+        public string Ro_PreviewContent { get; set; }
     }
 }

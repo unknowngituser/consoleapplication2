@@ -52,5 +52,18 @@ namespace MegaKids.WebUI.Controllers
                 return Json(new { Result = "ERROR", ex.Message });
             }
         }
+
+        public JsonResult GetVideoList()
+        {
+            try
+            {
+                var listPage = MainServices.Albums.GetGalleryVideoList(CurrentLang);
+                return Json(listPage);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", ex.Message });
+            }
+        }
     }
 }

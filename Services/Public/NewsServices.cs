@@ -81,7 +81,8 @@ namespace MegaKids.Services.Public
                 Title = news.Title,
                 Seo_Keywords = news.Seo_Keywords,
                 Seo_Description = news.Seo_Description,
-                NewsContent = news.NewsContent
+                NewsContent = news.NewsContent,
+                PreviewContent = news.PreviewContent
             };
         }
 

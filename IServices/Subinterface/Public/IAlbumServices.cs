@@ -21,6 +21,8 @@ namespace MegaKids.IServices.Subinterface.Public
         List<ModelAlbum> GetRecentAlbums(Language lang, int? currentAlbum);
 
         #region Видео
+        List<ModelGalleryVideo> GetGalleryVideoList(Language lang);
+
         List<ModelGalleryVideo> GetGalleryVideos(Language lang);
         #endregion
 

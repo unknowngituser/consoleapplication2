@@ -27,5 +27,7 @@ namespace MegaKids.DataModel.Models
         public string Seo_Description { get; set; }
 
         public string NewsContent { get; set; }
+
+        public string PreviewContent { get; set; }
     }
 }

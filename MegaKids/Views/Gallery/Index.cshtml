@@ -47,7 +47,7 @@
                                     <div class="margin-top-10">
                                        
                                         <div class="row mix-grid">
-                                            <!-- ko foreach: List -->
+                                            <!-- ko foreach: AlbumList -->
                                             <div class="col-md-3 col-sm-4 mix category_1">
                                                 <div class="mix-inner">
                                                     <img class="img-responsive" data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()}" alt="">
@@ -68,7 +68,7 @@
                                     <!-- BEGIN FILTER -->
                                     <div class="filter-v1 margin-top-10">
                                         <div class="row mix-grid thumbnails">
-                                            <!-- ko foreach: List -->
+                                            <!-- ko foreach: AlbumList -->
                                             <div class="col-md-4 col-sm-6 mix category_1">
                                                 <div class="mix-inner">
                                                     <img class="img-responsive" data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()}" alt="">
@@ -110,25 +110,19 @@
         <div class="gallery-videos">
             <div class="videos-title">
                 <h2>@Resource.Video</h2>
+                <img id="video-loading" style="display:none;margin: 0 0 20px 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
             </div>
             <div id="showcase" class="showcase">
-                @*<div class="showcase-slide">
-                    <div class="showcase-content">
-                        <div class="showcase-content-wrapper">
-                            <h1>Mega Kids Video</h1>
-                            <h2>Mega Kids Video</h2>
-                            <p><em>Mega Kids Video</em></p>
-                        </div>
-                    </div>
-                </div>*@
-                @foreach (var video in Model.Videos)
-                {
+                
+                <!-- ko foreach: VideoList -->
                     <div class="showcase-slide">
-                        <div class="showcase-content">
-                            @Html.Raw(video.Video)
+                        <div class="showcase-content" data-bind="html:Video">
                         </div>
                     </div>
-                }
+                <!-- /ko -->
+                <!-- ko if: IsLoadet -->
+                <div data-bind="Binding:IsLoadet"></div>
+                <!-- /ko -->
             </div>
         </div>
 
@@ -145,58 +139,27 @@
 <script src="~/Scripts/knockout-3.4.2.js"></script>
 <script>
 jQuery(document).ready(function() {
-    
-    moment.locale('ru');
+
+    moment.locale('@Lang.Id');
     Portfolio.init();
-    
+
 });
 </script>   
 <script src="~/Scripts/jquery.aw-showcase.js"></script>
-<script type="text/javascript">
 
-$(document).ready(function()
-{
-	$("#showcase").awShowcase(
-	{
-		content_width:			820,
-		content_height:			461,
-		fit_to_parent:			false,
-		auto:					false,
-		interval:				3000,
-		continuous:				false,
-		loading:				true,
-		tooltip_width:			200,
-		tooltip_icon_width:		32,
-		tooltip_icon_height:	32,
-		tooltip_offsetx:		18,
-		tooltip_offsety:		0,
-		arrows:					true,
-		buttons:				false,
-		btn_numbers:			true,
-		keybord_keys:			true,
-		mousetrace:				false, /* Trace x and y coordinates for the mouse */
-		pauseonover:			true,
-		stoponclick:			false,
-		transition:				'fade', /* hslide/vslide/fade */
-		transition_delay:		0,
-		transition_speed:		500,
-		show_caption:			'onload', /* onload/onhover/show */
-		thumbnails:				false,
-		thumbnails_position:	'outside-last', /* outside-last/outside-first/inside-last/inside-first */
-		thumbnails_direction:	'vertical', /* vertical/horizontal */
-		thumbnails_slidex:		1, /* 0 = auto / 1 = slide one thumbnail / 2 = slide two thumbnails / etc. */
-		dynamic_height:			false, /* For dynamic height to work in webkit you need to set the width and height of images in the source. Usually works to only set the dimension of the first slide in the showcase. */
-		speed_change:			true, /* Set to true to prevent users from swithing more then one slide at once. */
-		viewline:				false, /* If set to true content_width, thumbnails, transition and dynamic_height will be disabled. As for dynamic height you need to set the width and height of images in the source. */
-		custom_function:		null /* Define a custom function that runs on content change */
-	});
-});
-
-</script>
     <script>
+        ko.bindingHandlers.Binding = {
+            update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+                var value = ko.unwrap(valueAccessor());
+                if (value) {
+                    $('#showcase').awShowcase();
+                }
+                
+            }
+        };
         var Filter = function (data) {
             var proto = {
-                
+
                 CurrentPage: 1,
                 PageSize: 6,
                 CountPage: 1,
@@ -204,12 +167,12 @@ $(document).ready(function()
             }
             $.extend(proto, data);
             var self = this;
-            
+
             this.CurrentPage = ko.observable(proto.CurrentPage);
             this.PageSize = ko.observable(proto.PageSize);
             this.CountPage = ko.observable(proto.CountPage);
             this.CountItems = ko.observable(proto.CountItems);
-            
+
         }
 
         var Album = function (data) {
@@ -230,12 +193,30 @@ $(document).ready(function()
             this.PhotoName = ko.observable(proto.PhotoName);
 
         }
+        var VideoModel = function (data) {
+            var proto = {
+                Id: 0,
+                CreateDate: new Date(),
+                Title: '',
+                Video: ''
+            }
+            $.extend(proto, data);
+            var self = this;
+
+            this.Id = ko.observable(proto.Id);
+            this.CreateDate = ko.observable(proto.CreateDate);
+            this.Title = ko.observable(proto.Title);
+            this.Video = ko.observable(proto.Video);
+
+        }
 
         var model = {
-            
-            List: ko.observableArray([]),
+
+            AlbumList: ko.observableArray([]),
+            VideoList: ko.observableArray([]),
             FilterTable: ko.observable(new Filter()),
-            LoadData: function () {
+            IsLoadet: ko.observable(false),
+            LoadAlbumList: function () {
                 $("#album-loading").show();
                 var params = ko.toJSON(model.FilterTable());
                 $.ajax({
@@ -247,10 +228,10 @@ $(document).ready(function()
                     accept: 'application/json',
                     url: '@Url.Action("GetAlbumList", "gallery")',
                     success: function (data) {
-                        model.List.removeAll();
+                        model.AlbumList.removeAll();
                         for (var i in data.List) {
                             var item = new Album(data.List[i]);
-                            model.List.push(item);
+                            model.AlbumList.push(item);
                         }
                         model.FilterTable().CountItems(data.CountItems);
                         model.FilterTable().CountPage(data.CountPage);
@@ -262,21 +243,41 @@ $(document).ready(function()
             NextPage: function () {
                 if (model.FilterTable().CurrentPage() < model.FilterTable().CountPage()) {
                     model.FilterTable().CurrentPage(model.FilterTable().CurrentPage() + 1);
-                    model.LoadData();
+                    model.LoadAlbumList();
                 }
             },
             PrevPage: function () {
                 if (model.FilterTable().CurrentPage() > 1) {
                     model.FilterTable().CurrentPage(model.FilterTable().CurrentPage() - 1);
-                    model.LoadData();
+                    model.LoadAlbumList();
                 }
+            },
+            LoadVideoList: function () {
+                $("#video-loading").show();
+                var params = ko.toJSON(model.FilterTable());
+                $.ajax({
+                    method: "POST",
+                    processData: false,
+                    contentType: false,
+                    url: '@Url.Action("GetVideoList", "gallery")',
+                    success: function (data) {
+                        model.VideoList.removeAll();
+                        for (var i in data) {
+                            var item = new VideoModel(data[i]);
+                            model.VideoList.push(item);
+                        }
+                        model.IsLoadet(true);
+                        console.log('video', model.VideoList());
+                        $("#video-loading").hide();
+                    }
+                });
             }
-
 
         };
         $(function () {
             ko.applyBindings(model);
-            model.LoadData();
+            model.LoadAlbumList();
+            model.LoadVideoList();
         });
     </script>
 }

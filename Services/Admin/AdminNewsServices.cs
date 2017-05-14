@@ -48,7 +48,8 @@ namespace MegaKids.Services.Admin
                     Title = model.Ru_Title,
                     Seo_Keywords = model.Ru_Seo_Keywords,
                     Seo_Description = model.Ru_Seo_Description,
-                    NewsContent = model.Ru_NewsContent
+                    NewsContent = model.Ru_NewsContent,
+                    PreviewContent = model.Ru_PreviewContent
                 };
                 db.NewsLanguages.Add(newsLangRu);
                 var newsLangRo = new NewsLanguage()
@@ -58,7 +59,8 @@ namespace MegaKids.Services.Admin
                     Title = model.Ro_Title,
                     Seo_Keywords = model.Ro_Seo_Keywords,
                     Seo_Description = model.Ro_Seo_Description,
-                    NewsContent = model.Ro_NewsContent
+                    NewsContent = model.Ro_NewsContent,
+                    PreviewContent = model.Ro_PreviewContent
                 };
                 db.NewsLanguages.Add(newsLangRo);
                 db.SaveChanges();
@@ -87,10 +89,12 @@ namespace MegaKids.Services.Admin
                     Ru_Seo_Keywords = newsRu.Seo_Keywords,
                     Ru_Seo_Description = newsRu.Seo_Description,
                     Ru_NewsContent = newsRu.NewsContent,
+                    Ru_PreviewContent = newsRu.PreviewContent,
                     Ro_Title = newsRo.Title,
                     Ro_Seo_Keywords = newsRo.Seo_Keywords,
                     Ro_Seo_Description = newsRo.Seo_Description,
-                    Ro_NewsContent = newsRo.NewsContent
+                    Ro_NewsContent = newsRo.NewsContent,
+                    Ro_PreviewContent = newsRo.PreviewContent
                 };
                 return result;
             }
@@ -120,10 +124,12 @@ namespace MegaKids.Services.Admin
                 newsRu.Seo_Keywords = model.Ru_Seo_Keywords;
                 newsRu.Seo_Description = model.Ru_Seo_Description;
                 newsRu.NewsContent = model.Ru_NewsContent;
+                newsRu.PreviewContent = model.Ru_PreviewContent;
                 newsRo.Title = model.Ro_Title;
                 newsRo.Seo_Keywords = model.Ro_Seo_Keywords;
                 newsRo.Seo_Description = model.Ro_Seo_Description;
                 newsRo.NewsContent = model.Ro_NewsContent;
+                newsRo.PreviewContent = model.Ro_PreviewContent;
                 db.SaveChanges();
             }
         }

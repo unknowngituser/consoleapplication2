@@ -3,6 +3,7 @@
     ViewBag.Title = "Редактирование новости";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/css/index.css" rel="stylesheet" />
 <style rel="stylesheet" type="text/css">
     #cke_1_top, #cke_2_top {
         background: #F8F8F8;
@@ -92,6 +93,14 @@
                                 </textarea>
                             </div>
                         </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-1 control-label" for="Ru_PreviewContent">Текст для превью</label>
+                            <div class="col-md-11">
+                                <textarea class="form-control" id="Ru_PreviewContent" name="Ru_PreviewContent" rows="3" placeholder="">@Model.Ru_PreviewContent</textarea>
+                                <div class="form-control-focus">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="RO_tab">
                         <div class="form-group form-md-line-input">
@@ -124,6 +133,14 @@
                                 <textarea class="ckeditor form-control" id="Ro_NewsContent" name="Ro_NewsContent" rows="6">
                                     @Model.Ro_NewsContent
                                 </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-1 control-label" for="Ro_PreviewContent">Текст для превью</label>
+                            <div class="col-md-11">
+                                <textarea class="form-control" id="Ro_PreviewContent" name="Ro_PreviewContent" rows="3" placeholder="">@Model.Ro_PreviewContent</textarea>
+                                <div class="form-control-focus">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -175,18 +192,38 @@
                             }
                             
                         </div>
-                        <label class="control-label col-md-offset-1 col-md-1" for="CreateDate">Дата добавления</label>
-                        <div class="col-md-3">
-                            <input class="form-control datetime" value="@Model.CreateDate" id="CreateDate" name="CreateDate" style="width: 250px" type="text">
+                        <label class="control-label col-md-1" for="CreateDate">Дата добавления</label>
+                        <div class="col-md-2">
+                            <input class="form-control datetime" value="@Model.CreateDate" id="CreateDate" name="CreateDate" style="width: 180px" type="text">
                             <span class="help-block">
                                 Выберите дату
                             </span>
+                        </div>
+                        <div class="col-md-3 col-md-offset-1" id="Preview" style="display:none;">
+                            <a class="latest-news-link" style="cursor:default;text-decoration: none;">
+                                <div class="latest-news">
+                                    <div class="latest-news-image">
+                                        <img id="preview-img" width="250" />
+                                    </div>
+                                    <p class="latest-news-date" id="preview-date">
+
+                                    </p>
+                                    <p class="latest-news-title" id="preview-title">
+
+                                    </p>
+                                    <div class="latest-news-content" id="preview-content">
+
+                                    </div>
+                                </div>
+                            </a>
+
                         </div>
                     </div>
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-1 col-md-11">
                                 <button type="button" id="Save-News" value="@Model.Id" class="btn blue">Сохранить</button>
+                                <button type="button" id="Show-Preview" class="btn blue">Показать превью</button>
                             </div>
                         </div>
                     </div>
@@ -238,7 +275,15 @@
     <script>
         $(function() {
             ComponentsFormTools.init();
-
+            $('#Show-Preview').click(function () {
+                var img = $('div.fileinput-preview.thumbnail > img').attr('src');
+                $('#preview-img').attr('src', img);
+                var date = $('#CreateDate').val() || '@DateTime.Now';
+                $('#preview-date').text(date.substr(0, 11));
+                $('#preview-title').text($('#Ru_Title').val());
+                $('#preview-content').text($('#Ru_PreviewContent').val());
+                $('#Preview').show();
+            });
             $('#Save-News').click(function () {
                 for (instance in CKEDITOR.instances) {
                     CKEDITOR.instances[instance].updateElement();
@@ -251,10 +296,13 @@
                 data.append("Ru_Seo_Keywords", $("#Ru_Seo_Keywords").val());
                 data.append("Ru_Seo_Description", $("#Ru_Seo_Description").val());
                 data.append("Ru_NewsContent", $("#Ru_NewsContent").val());
+                data.append("Ru_PreviewContent", $("#Ru_PreviewContent").val());
+                
                 data.append("Ro_Title", $("#Ro_Title").val());
                 data.append("Ro_Seo_Keywords", $("#Ro_Seo_Keywords").val());
                 data.append("Ro_Seo_Description", $("#Ro_Seo_Description").val());
                 data.append("Ro_NewsContent", $("#Ro_NewsContent").val());
+                data.append("Ro_PreviewContent", $("#Ro_PreviewContent").val());
                 data.append("CreateDate", $("#CreateDate").val());
 
                 data.append("PhotoFile", files[0]);

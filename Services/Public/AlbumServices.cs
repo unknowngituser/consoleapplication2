@@ -40,6 +40,8 @@ namespace MegaKids.Services.Public
                 return result;
             }
         }
+
+        
         public List<ModelAlbum> GetAlbumList(Language lang)
         {
             using (var db = new DataContext())
@@ -105,6 +107,36 @@ namespace MegaKids.Services.Public
         }
 
         #region Видео
+        public List<ModelGalleryVideo> GetGalleryVideoList(Language lang)
+        {
+
+            using (var db = new DataContext())
+            {
+                var videos = db.GalleryVideoLanguages.Include(x => x.GalleryVideo)
+                    .Where(x => x.LanguageId == lang.Id)
+                    .OrderByDescending(x => x.GalleryVideo.CreateDate).ToList();
+                var result = videos.Select(x => ConvertToModelGalleryVideo(x)).ToList();
+                return result;
+                //var query = db.AlbumLanguages.Include(x => x.Album)
+                //    .Where(x => x.LanguageId == lang.Id && x.Album.ParentId == null)
+                //    .OrderByDescending(x => x.Album.CreateDate).ToList();
+
+                //var countRow = query.Count();
+                //result.CountPage = data.PageSize != 0 ? (int)(Math.Ceiling(countRow / (decimal)data.PageSize)) : 1;
+                //var currentPage = result.CountPage < data.CurrentPage - 1 ? result.CountPage : data.CurrentPage - 1;
+                //result.CountItems = countRow;
+                //result.List = query.Skip(data.PageSize * (currentPage)).Take(data.PageSize).ToList()
+                //    .Select(x => new ModelAlbum()
+                //    {
+                //        Id = x.AlbumId,
+                //        Name = x.Name,
+                //        Descrition = x.Descrition,
+                //        CreateDate = x.Album.CreateDate,
+                //        PhotoName = x.Album.PhotoName
+                //    }).ToList();
+                //return result;
+            }
+        }
         public List<ModelGalleryVideo> GetGalleryVideos(Language lang)
         {
             using (var db = new DataContext())

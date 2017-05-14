@@ -107,6 +107,10 @@
     <Compile Include="Migrations\201705091614534_gallery-video.Designer.cs">
       <DependentUpon>201705091614534_gallery-video.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705140127042_PreviewContent.cs" />
+    <Compile Include="Migrations\201705140127042_PreviewContent.Designer.cs">
+      <DependentUpon>201705140127042_PreviewContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CafeAlbum.cs" />
     <Compile Include="Models\CafeAlbumLanguage.cs" />
@@ -183,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705091614534_gallery-video.resx">
       <DependentUpon>201705091614534_gallery-video.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705140127042_PreviewContent.resx">
+      <DependentUpon>201705140127042_PreviewContent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

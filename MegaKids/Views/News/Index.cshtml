@@ -35,7 +35,14 @@
                                     @Resource.Added: <span data-bind="text:moment(CreateDate()).format('ll')"></span>
                                 </p>
                                 <p class="news-item-title" data-bind="text:Title"></p>
+                                <!-- ko if: !PreviewContent()-->
                                 <div class="news-item-content" data-bind="html:NewsContent()"></div>
+                                <!--/ko-->
+                                <!-- ko if: PreviewContent() -->
+                                <div class="news-item-content">
+                                    <p data-bind="text:PreviewContent"></p>
+                                </div>
+                                <!--/ko-->
                             </div>
                         </a>
                     </div>
@@ -97,7 +104,8 @@
                 CreateDate: new Date(),
                 Photo: '',
                 Title: '',
-                NewsContent: ''
+                NewsContent: '',
+                PreviewContent: ''
             }
             $.extend(proto, data);
             var self = this;
@@ -107,6 +115,7 @@
             this.Photo = ko.observable(proto.Photo);
             this.Title = ko.observable(proto.Title);
             this.NewsContent = ko.observable(proto.NewsContent);
+            this.PreviewContent = ko.observable(proto.PreviewContent);
 
         }
 
@@ -131,6 +140,7 @@
                             var item = new News(data.List[i]);
                             model.List.push(item);
                         }
+                        console.log('news',model.List());
                         model.FilterTable().CountItems(data.CountItems);
                         model.FilterTable().CountPage(data.CountPage);
                         setTimeout(function () { $('.news-item-link').css("opacity", 1); }, 500);
@@ -154,7 +164,7 @@
 
         };
     $(function () {
-        moment.locale('ru');
+        moment.locale('@Lang.Id');
             ko.applyBindings(model);
             model.LoadData();
         });

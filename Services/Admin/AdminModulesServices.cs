@@ -278,7 +278,7 @@ namespace MegaKids.Services.Admin
                     CreateDate = sliderRu.Slider.CreateDate,
                     Photo = sliderRu.Slider.Photo,
                     Ru_Title = sliderRu.Title,
-                    Ru_Content = sliderRo.Content,
+                    Ru_Content = sliderRu.Content,
                     Ro_Title = sliderRo.Title,
                     Ro_Content = sliderRo.Content
                 };

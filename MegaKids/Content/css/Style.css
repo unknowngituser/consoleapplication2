@@ -1,6 +1,6 @@
-﻿/*body{
-    font:normal 14px Akrobat-Bold;
-}*/
+﻿body{
+    font-family:Akrobat,Akrobat-Regular, Akrobat-Bold,sans-serif;
+}
 #header{
     height: 554px;
 }
@@ -42,7 +42,8 @@
     display:inline;
     padding:0;
     color:#ffffff;
-    font-family:Akrobat-SemiBold;
+    font-family:Akrobat,Akrobat-Regular;
+    font-weight:bold;
     font-size:40px;
     width:187px;
     height:45px;
@@ -131,8 +132,7 @@ ol, ul {
 
 .widget-col li a{
     font-size:25px;
-    font-weight:bold;
-    font-family:Akrobat-Light;
+    font-family:Akrobat,Akrobat-Regular,Akrobat-Light;
     color:#515151;
     text-decoration:none;
 }
@@ -142,7 +142,7 @@ ol, ul {
     width:240px;
     height:45px;
     background-color:#00B3CC;
-    font:bold 22px Akrobat-Bold;
+    font:bold 22px Akrobat,Akrobat-Regular;
     color:#ffffff;
     text-transform:uppercase;
     display:inline-block;
@@ -156,19 +156,25 @@ ol, ul {
 .paging-items{
     width:30%;
     margin:0 auto;
-    font:bold 20px Akrobat-Bold;
+    font:20px Akrobat,Akrobat-Regular;
 }
 
 .paging-items li a.page-next{
     padding: 4px 10px 5px 25px;
     font-size: 20px;
+    font-weight:bold;
 }
 
 .paging-items li a.page-prev{
     padding: 4px 30px 5px 15px;
     font-size: 20px;
+    font-weight:bold;
 }
 
 .clear{
     clear:both;
+}
+
+#photos-list ul.nav-tabs li a{
+    font:normal 16px Akrobat-Light,Akrobat,Akrobat-Regular;
 }

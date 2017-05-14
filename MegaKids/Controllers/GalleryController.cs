@@ -65,5 +65,10 @@ namespace MegaKids.WebUI.Controllers
                 return Json(new { Result = "ERROR", ex.Message });
             }
         }
+        public ActionResult TestCollage()
+        {
+            var Photos = MainServices.Albums.GetAlbumPhotos(43);
+            return View(Photos);
+        }
     }
 }

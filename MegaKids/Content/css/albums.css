@@ -5,7 +5,7 @@
 }
 
 .album-head h2, .recent-albums h2{
-    font:bold 30px Akrobat-SemiBold;
+    font:bold 30px Akrobat,Akrobat-Regular;
     color:#0a7fba;
     display:inline-block;
     margin-top: 50px;
@@ -17,12 +17,12 @@
 }
 
 .mix-details h2, .mix-details h3{
-    font:bold 30px Akrobat-Bold;
+    font:bold 30px Akrobat,Akrobat-Regular, Akrobat-Bold;
     color:#ffffff;
     text-transform: uppercase;
 }
 
 .mix-details h2{
-    margin-top: 25%;
+    margin-top: 20%;
     margin-bottom: 0;
 }

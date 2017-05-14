@@ -1,16 +1,16 @@
 ﻿/* Блок кафе */
 
-.cafe-block {
+.cafe-link-block {
     background: #FFFFFF url('../Images/cafe-background.jpg') no-repeat center;
-    height:450px;
+    display:block;
+    padding-bottom:20px;
 }
 
-.cafe-block .cafe-center{
-    width:100%;
-    position:absolute;
+.cafe-link-block:hover, .cafe-link-block:focus{
+    text-decoration:none;
 }
 
-.cafe-block .cafe-name {
+.cafe-link-block .cafe-name {
     position:relative;
     top:12px;
     margin: 0 auto;
@@ -20,16 +20,16 @@
     height:342px;
 }
 
-.cafe-block .cafe-text{
+.cafe-link-block .cafe-text{
     position:relative;
     bottom:-16px;
     text-align:center;
 }
 
-.cafe-block .cafe-text span{
+.cafe-link-block .cafe-text span{
     
     font-size:61px;
-    font-family:Lobster-Regular;
+    font-family:Lobster,Lobster-Regular;
     color:#ffffff;
 }
 
@@ -68,14 +68,14 @@
 }
 
 .slider-title{
-    font-family:Akrobat-Bold;
+    font-family:Akrobat,Akrobat-Regular,Akrobat-Bold;
     font-size:30px;
     font-weight:bold;
     display:block;
 }
 
 .slider-text{
-    font-family:Akrobat-Regular;
+    font-family:Akrobat,Akrobat-Regular;
     font-size:20px;
     font-weight:normal;
 }
@@ -123,9 +123,9 @@
 }
 
 .home-description p{
-    font-family:Akrobat-SemiBold;
+    font-family:Akrobat,Akrobat-Regular;
     font-size:28px;
-    font-weight:bold;
+    /*font-weight:bold;*/
     color:#006496;
 }
 
@@ -144,7 +144,7 @@
 
 .home-last-news-head h2{
     padding:15px 50px;
-    font:bold 49px Akrobat-Bold;
+    font:bold 49px Akrobat,Akrobat-Regular;
     text-transform:uppercase;
     color:#0a7fba;
     margin:0;
@@ -206,20 +206,20 @@
 }
 
 p.latest-news-date{
-    font:bold 18px Akrobat-Light;
+    font:18px Akrobat-Light,Akrobat,Akrobat-Regular;
     color:#589bc4;
     margin-bottom:20px;
     padding:0 10px;
 }
 
 p.latest-news-title{
-    font:bold 18px Akrobat-Bold;
+    font:bold 18px Akrobat,Akrobat-Regular;
     color:#FF1103;
     padding:0 10px;
 }
 
 .latest-news-content{
-    font:bold 16px Akrobat-SemiBold;
+    font:16px Akrobat,Akrobat-Regular;
     color:#589bc4;
     padding:0 10px;
 }
@@ -231,7 +231,7 @@ p.latest-news-title{
 
 .watch-more-news a{
     text-decoration:none;
-    font:normal 25px Akrobat-Light;
+    font:normal 25px Akrobat,Akrobat-Regular, Akrobat-Light;
     color:#FFFFFF;
     background-color:#5893c4;
     display:inline-block;
@@ -284,7 +284,7 @@ p.latest-news-title{
 }
 
 .map-contacts p{
-    font:bold 30px Akrobat-Light;
+    font:30px Akrobat,Akrobat-Regular,Akrobat-Light;
     color:#5393c3;
     letter-spacing:1px;
 }

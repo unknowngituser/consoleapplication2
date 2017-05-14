@@ -5,7 +5,7 @@
 }
 
 .container-gallery h2{
-    font:bold 35px Akrobat-Bold;
+    font:bold 35px Akrobat,Akrobat-Regular, Akrobat-Bold;
     color:#0a7fba;
     text-transform:uppercase;
     display:inline-block;
@@ -33,7 +33,7 @@
 }
 
 .mix-details h2, .mix-details h3{
-    font:bold 30px Akrobat-Bold;
+    font:bold 30px Akrobat,Akrobat-Regular,Akrobat-Bold;
     color:#ffffff;
     text-transform: uppercase;
 }
@@ -43,7 +43,7 @@
     margin-bottom: 0;
 }
 
-#photos-list .mix-grid .mix .mix-details {
+#photos-list .mix-grid .mix .mix-details, #photos-list .Collage .Image_Wrapper {
     cursor: url('../Images/gallery/cursor-pl.png'), zoom-in !important;
     background: none !important;
     height:100% !important;

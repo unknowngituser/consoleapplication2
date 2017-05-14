@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MegaKids.IServices.Models.ModelAlbum>
+
+@{
+    
+}
+<link href="~/Content/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+<link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/css/transitions.css" rel="stylesheet" />
+<link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/support/examples.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="Collage">
+        @foreach (var photo in Model)
+        {
+            <div class="Image_Wrapper mix-details mix-preview fancybox-button" href="~/Content/Images/gallery/albums/@{@photo.ParentId}/photos/@{@photo.PhotoName}" title="" data-rel="fancybox-button">
+    <img src="~/Content/Images/gallery/albums/@{@photo.ParentId}/photos/@{@photo.PhotoName}">
+</div>
+
+    }
+    </div>
+</div>
+
+@section scripts{
+<script type="text/javascript" src="~/Content/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+    <script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/jquery.collagePlus.js"></script>
+<script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/extras/jquery.removeWhitespace.js"></script>
+<script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/extras/jquery.collageCaption.js"></script>
+    <script>
+        $(window).load(function () {
+            $(document).ready(function () {
+                collage();
+                $('.Collage').collageCaption();
+            });
+        });
+        // Here we apply the actual CollagePlus plugin
+        function collage() {
+            $('.Collage').removeWhitespace().collagePlus(
+                {
+                    'fadeSpeed': 2000,
+                    'targetHeight': 200,
+                    'effect': 'effect-6'
+                }
+            );
+        };
+
+        // This is just for the case that the browser window is resized
+        var resizeTimer = null;
+        $(window).bind('resize', function () {
+            // hide all the images until we resize them
+            $('.Collage .Image_Wrapper').css("opacity", 0);
+            // set a timer to re-apply the plugin
+            if (resizeTimer) clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(collage, 200);
+        });
+    </script>    
+}

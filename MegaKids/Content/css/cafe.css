@@ -11,13 +11,13 @@
 }
 
 .cafe-head h1, .cafe-album-head h1{
-    font: 70px Lobster-Regular;
+    font: 70px Lobster,Lobster-Regular;
     color:#FE2202;
     margin:0;
 }
 
 .cafe-head h3{
-    font: 42px Lobster-Regular;
+    font: 42px Lobster,Lobster-Regular;
     color:#589bc4;
     margin:0;
 }
@@ -102,12 +102,12 @@
 }
 
 .cafe-description h1, .cafe-description h2{
-    font: 50px Lobster-Regular;
+    font: 50px Lobster,Lobster-Regular;
     color:#006BA1;
 }
 
 .cafe-description p{
-    font: 25px Akrobat-SemiBold;
+    font: 25px Akrobat,Akrobat-Regular;
     color:#07759e;
     line-height: 1.5;
 }

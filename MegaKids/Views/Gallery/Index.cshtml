@@ -12,15 +12,61 @@
 <!-- BEGIN THEME STYLES -->
 <link href="~/Content/assets/global/css/plugins-md.css" rel="stylesheet" type="text/css" />
 <!-- END THEME STYLES -->
+<link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/css/transitions.css" rel="stylesheet" />
+<link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/support/examples.css" rel="stylesheet" />
 <style type="text/css">
     .header-menu a#btn-gallery {
         background-color: #57abe4;
     }
 </style>
-
 <div class="container-gallery">
-    <div class="container-zero">
+    <div class="container">
         <div class="gallery-albums">
+            <div class="albums-title">
+                <h2>@Resource.Photoalbums</h2>
+                <img id="album-loading" style="display:none;margin: 0 0 20px 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
+            </div>
+            <div class="albums-content">
+                <div class="Collage mix-grid">
+                    <!-- ko foreach: AlbumList -->
+                    @*<div class="Image_Wrapper">
+        <img data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()}" >
+    </div>*@
+    <div class="mix">
+        <div class="mix-inner">
+            <img data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()}" alt="">
+            <a data-bind="attr:{href:'/gallery/albums/'+Id()}">
+                <div class="mix-details" title="Перейти к фотографиям">
+                    <h2 data-bind="text:Name"></h2>
+                    <h3 data-bind="text:moment(CreateDate()).format('ll')"></h3>
+                </div>
+            </a>
+        </div>
+    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="paging-items">
+                <ul class="pager">
+                    <li class="previous">
+                        <a data-bind="click:PrevPage" class="btn blue page-prev">
+                            <i class="fa fa-angle-left"></i> @Resource.Back
+                        </a>
+                    </li>
+                    <li class="next">
+                        <a data-bind="click:NextPage" class="btn blue page-next">
+                            @Resource.Next <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-gallery">
+    <div class="container">
+        @*<div class="gallery-albums">
             <div class="albums-title">
                 <h2>@Resource.Photoalbums</h2>
                 <img id="album-loading" style="display:none;margin: 0 0 20px 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
@@ -106,7 +152,7 @@
                 </ul>
             </div>
             
-        </div>
+        </div>*@
         <div class="gallery-videos">
             <div class="videos-title">
                 <h2>@Resource.Video</h2>
@@ -119,9 +165,6 @@
                         <div class="showcase-content" data-bind="html:Video">
                         </div>
                     </div>
-                <!-- /ko -->
-                <!-- ko if: IsLoadet -->
-                <div data-bind="Binding:IsLoadet"></div>
                 <!-- /ko -->
             </div>
         </div>
@@ -137,26 +180,22 @@
 <script src="~/Content/assets/admin/pages/scripts/portfolio.js"></script>
 <script src="~/Scripts/moment-with-locales.js"></script>
 <script src="~/Scripts/knockout-3.4.2.js"></script>
+
+<script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/jquery.collagePlus.js"></script>
+<script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/extras/jquery.removeWhitespace.js"></script>
+<script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/extras/jquery.collageCaption.js"></script>
 <script>
-jQuery(document).ready(function() {
-
-    moment.locale('@Lang.Id');
-    Portfolio.init();
-
-});
-</script>   
+    $(document).ready(function () {
+        moment.locale('@Lang.Id');
+        Portfolio.init();
+        
+    });
+        
+</script>    
+      
 <script src="~/Scripts/jquery.aw-showcase.js"></script>
 
     <script>
-        ko.bindingHandlers.Binding = {
-            update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-                var value = ko.unwrap(valueAccessor());
-                if (value) {
-                    $('#showcase').awShowcase();
-                }
-                
-            }
-        };
         var Filter = function (data) {
             var proto = {
 
@@ -215,10 +254,11 @@ jQuery(document).ready(function() {
             AlbumList: ko.observableArray([]),
             VideoList: ko.observableArray([]),
             FilterTable: ko.observable(new Filter()),
-            IsLoadet: ko.observable(false),
+            IsLoadetAlbums: ko.observable(false),
             LoadAlbumList: function () {
                 $("#album-loading").show();
                 var params = ko.toJSON(model.FilterTable());
+                $('.albums-content').hide();
                 $.ajax({
                     method: "POST",
                     datatype: "json",
@@ -233,6 +273,17 @@ jQuery(document).ready(function() {
                             var item = new Album(data.List[i]);
                             model.AlbumList.push(item);
                         }
+                        var time = 200;
+                        setTimeout(function () {
+                            $('.Collage').removeWhitespace().collagePlus(
+                            {
+                                'fadeSpeed': 2000,
+                                'targetHeight': 300,
+                                'effect': 'effect-6',
+                                'allowPartialLastRow': true
+                            })
+                        } ,time);
+                        $('.albums-content').show();
                         model.FilterTable().CountItems(data.CountItems);
                         model.FilterTable().CountPage(data.CountPage);
                         setTimeout(function () { $('.category_1').css("opacity", 1); }, 500);
@@ -266,7 +317,7 @@ jQuery(document).ready(function() {
                             var item = new VideoModel(data[i]);
                             model.VideoList.push(item);
                         }
-                        model.IsLoadet(true);
+                        (function () { $('#showcase').awShowcase(); }());
                         console.log('video', model.VideoList());
                         $("#video-loading").hide();
                     }

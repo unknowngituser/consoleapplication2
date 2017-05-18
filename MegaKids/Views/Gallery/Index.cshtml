@@ -15,7 +15,7 @@
 <link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/css/transitions.css" rel="stylesheet" />
 <link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/support/examples.css" rel="stylesheet" />
 <style type="text/css">
-    .header-menu a#btn-gallery {
+    a#btn-gallery {
         background-color: #57abe4;
     }
 </style>
@@ -34,7 +34,7 @@
     </div>*@
     <div class="mix">
         <div class="mix-inner">
-            <img data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()}" alt="">
+            <img data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()},visible:$parent.IsShowAlbum" style="width:auto;" alt="">
             <a data-bind="attr:{href:'/gallery/albums/'+Id()}">
                 <div class="mix-details" title="Перейти к фотографиям">
                     <h2 data-bind="text:Name"></h2>
@@ -66,93 +66,7 @@
 </div>
 <div class="container-gallery">
     <div class="container">
-        @*<div class="gallery-albums">
-            <div class="albums-title">
-                <h2>@Resource.Photoalbums</h2>
-                <img id="album-loading" style="display:none;margin: 0 0 20px 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
-            </div>
-            <div class="albums-content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tabbable-line boxless">
-                            <ul class="nav nav-tabs">
-                                <li>
-                                    <a href="#tab_1" data-toggle="tab">
-                                        4 @Resource.Columns
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    <a href="#tab_2" data-toggle="tab">
-                                        3 @Resource.Columns
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane" id="tab_1">
-                                    <!-- BEGIN FILTER -->
-                                    <div class="margin-top-10">
-                                       
-                                        <div class="row mix-grid">
-                                            <!-- ko foreach: AlbumList -->
-                                            <div class="col-md-3 col-sm-4 mix category_1">
-                                                <div class="mix-inner">
-                                                    <img class="img-responsive" data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()}" alt="">
-                                                    <a data-bind="attr:{href:'/gallery/albums/'+Id()}">
-                                                        <div class="mix-details" title="Перейти к фотографиям">
-                                                            <h2 data-bind="text:Name"></h2>
-                                                            <h3 data-bind="text:moment(CreateDate()).format('ll')"></h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- /ko -->
-                                        </div>
-                                    </div>
-                                    <!-- END FILTER -->
-                                </div>
-                                <div class="tab-pane active" id="tab_2">
-                                    <!-- BEGIN FILTER -->
-                                    <div class="filter-v1 margin-top-10">
-                                        <div class="row mix-grid thumbnails">
-                                            <!-- ko foreach: AlbumList -->
-                                            <div class="col-md-4 col-sm-6 mix category_1">
-                                                <div class="mix-inner">
-                                                    <img class="img-responsive" data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()}" alt="">
-                                                    <a data-bind="attr:{href:'/gallery/albums/'+Id()}">
-                                                        <div class="mix-details" title="Перейти к фотографиям">
-                                                            <h2 data-bind="text:Name"></h2>
-                                                            <h3 data-bind="text:moment(CreateDate()).format('ll')"></h3>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <!-- /ko -->
-                                        </div>
-                                    </div>
-                                    <!-- END FILTER -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clear"></div>
-            <div class="paging-items">
-                <ul class="pager">
-                    <li class="previous">
-                        <a data-bind="click:PrevPage" class="btn blue page-prev">
-                            <i class="fa fa-angle-left"></i> @Resource.Back
-                        </a>
-                    </li>
-                    <li class="next">
-                        <a data-bind="click:NextPage" class="btn blue page-next">
-                            @Resource.Next <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            
-        </div>*@
+        
         <div class="gallery-videos">
             <div class="videos-title">
                 <h2>@Resource.Video</h2>
@@ -254,11 +168,12 @@
             AlbumList: ko.observableArray([]),
             VideoList: ko.observableArray([]),
             FilterTable: ko.observable(new Filter()),
-            IsLoadetAlbums: ko.observable(false),
+            IsShowAlbum: ko.observable(false),
             LoadAlbumList: function () {
                 $("#album-loading").show();
                 var params = ko.toJSON(model.FilterTable());
-                $('.albums-content').hide();
+                //$('.albums-content').hide();
+                model.IsShowAlbum(false);
                 $.ajax({
                     method: "POST",
                     datatype: "json",
@@ -281,9 +196,10 @@
                                 'targetHeight': 300,
                                 'effect': 'effect-6',
                                 'allowPartialLastRow': true
-                            })
+                            });
+                            model.IsShowAlbum(true);
                         } ,time);
-                        $('.albums-content').show();
+                        
                         model.FilterTable().CountItems(data.CountItems);
                         model.FilterTable().CountPage(data.CountPage);
                         setTimeout(function () { $('.category_1').css("opacity", 1); }, 500);

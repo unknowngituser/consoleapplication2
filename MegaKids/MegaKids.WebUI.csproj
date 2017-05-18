@@ -177,6 +177,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\albums.css" />
     <Content Include="Content\css\cafe.css" />
+    <Content Include="Content\css\demo-template.css" />
     <Content Include="Content\css\gallery.css" />
     <Content Include="Content\css\news.css" />
     <Content Include="Content\css\watchnews.css" />
@@ -261,6 +262,7 @@
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\prefixfree.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />

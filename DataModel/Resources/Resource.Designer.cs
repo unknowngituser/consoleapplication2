@@ -115,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Кафе.
+        ///   Ищет локализованную строку, похожую на Дни рождения.
         /// </summary>
         public static string Cafe {
             get {
@@ -196,7 +196,25 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Новости.
+        ///   Ищет локализованную строку, похожую на Торговый Центр “СОЮЗ” 3 этаж.
+        /// </summary>
+        public static string Map_Marker {
+            get {
+                return ResourceManager.GetString("Map_Marker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ждём Вас ежедневно:.
+        /// </summary>
+        public static string Map_Time {
+            get {
+                return ResourceManager.GetString("Map_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на События.
         /// </summary>
         public static string News {
             get {
@@ -241,7 +259,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Последние новости.
+        ///   Ищет локализованную строку, похожую на Последние события.
         /// </summary>
         public static string RecentNews {
             get {
@@ -277,7 +295,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Смотри все новости.
+        ///   Ищет локализованную строку, похожую на Смотри все события.
         /// </summary>
         public static string WatchAllNews {
             get {

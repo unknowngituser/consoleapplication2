@@ -89,6 +89,12 @@
     left: 0;
 }
 
+.slider-arrows img{
+    max-width: 59px !important;
+    max-height: 113px !important;
+}
+
+
 /* Блок с описанием */
 
 .container-home-description{
@@ -284,7 +290,7 @@ p.latest-news-title{
 }
 
 .map-contacts p{
-    font:30px Akrobat,Akrobat-Regular,Akrobat-Light;
+    font:2em Akrobat,Akrobat-Regular,Akrobat-Light;
     color:#5393c3;
     letter-spacing:1px;
 }

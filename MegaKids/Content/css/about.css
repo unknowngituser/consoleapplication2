@@ -11,7 +11,7 @@
 }
 
 .about-content h1{
-    font:bold 55px Akrobat,Akrobat-Regular;
+    font:bold 8vmin Akrobat,Akrobat-Regular;
     color:#FF1103;
     margin:0;
     margin-bottom: 25px;
@@ -26,6 +26,7 @@
 }
 
 .about-content p{
-    font:normal 35px Akrobat,Akrobat-Regular;
+    font:normal 1.8em Akrobat,Akrobat-Regular;
     color:#589bc4;
+        line-height: 1.5;
 }

@@ -16,7 +16,7 @@ namespace MegaKids.WebUI.Helpers
             var routeValueDictionary = new RouteValueDictionary(routeData.Values);
             if (routeValueDictionary.ContainsKey("lang"))
             {
-                aTagBuilder.AddCssClass("lang-btn");
+                aTagBuilder.AddCssClass("lang-btn navbar-brand");
                 if (routeData.Values["lang"] as string == lang)
                 {
                     //aTagBuilder.AddCssClass("lang-btn");
@@ -26,6 +26,7 @@ namespace MegaKids.WebUI.Helpers
                     routeValueDictionary["lang"] = lang;
                 }
             }
+            aTagBuilder.MergeAttribute("id", "lang-swither");
             aTagBuilder.MergeAttribute("href", url.RouteUrl(routeValueDictionary));
             aTagBuilder.SetInnerText(Name);
             //liTagBuilder.InnerHtml = aTagBuilder.ToString();

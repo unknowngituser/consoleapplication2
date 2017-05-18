@@ -137,7 +137,7 @@
     <value>Înapoi</value>
   </data>
   <data name="Cafe" xml:space="preserve">
-    <value>Cafe</value>
+    <value>Zile de naștere</value>
   </data>
   <data name="Cafe_BirthDays" xml:space="preserve">
     <value>Zile de naștere</value>
@@ -163,8 +163,14 @@
   <data name="Language" xml:space="preserve">
     <value>ru</value>
   </data>
+  <data name="Map_Marker" xml:space="preserve">
+    <value>Centrul comercial "Soiuz" 3 etaj</value>
+  </data>
+  <data name="Map_Time" xml:space="preserve">
+    <value>Va așteptam in fiecare zi:</value>
+  </data>
   <data name="News" xml:space="preserve">
-    <value>Noutăți</value>
+    <value>Evenimente</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Înainte</value>
@@ -179,7 +185,7 @@
     <value>Mai mult</value>
   </data>
   <data name="RecentNews" xml:space="preserve">
-    <value>Știri recente</value>
+    <value>Evenimente recente</value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>Servicii</value>
@@ -191,7 +197,7 @@
     <value>Video</value>
   </data>
   <data name="WatchAllNews" xml:space="preserve">
-    <value>Vezi mai multe știri</value>
+    <value>Vezi mai multe evenimente</value>
   </data>
   <data name="WatchMore" xml:space="preserve">
     <value>Vezi mai mult</value>

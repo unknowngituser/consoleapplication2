@@ -137,7 +137,7 @@
     <value>Назад</value>
   </data>
   <data name="Cafe" xml:space="preserve">
-    <value>Кафе</value>
+    <value>Дни рождения</value>
   </data>
   <data name="Cafe_BirthDays" xml:space="preserve">
     <value>Дни рождения</value>
@@ -163,8 +163,14 @@
   <data name="Language" xml:space="preserve">
     <value>ro</value>
   </data>
+  <data name="Map_Marker" xml:space="preserve">
+    <value>Торговый Центр “СОЮЗ” 3 этаж</value>
+  </data>
+  <data name="Map_Time" xml:space="preserve">
+    <value>Ждём Вас ежедневно:</value>
+  </data>
   <data name="News" xml:space="preserve">
-    <value>Новости</value>
+    <value>События</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Вперед</value>
@@ -179,7 +185,7 @@
     <value>Подробнее</value>
   </data>
   <data name="RecentNews" xml:space="preserve">
-    <value>Последние новости</value>
+    <value>Последние события</value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>Услуги</value>
@@ -191,7 +197,7 @@
     <value>Видео</value>
   </data>
   <data name="WatchAllNews" xml:space="preserve">
-    <value>Смотри все новости</value>
+    <value>Смотри все события</value>
   </data>
   <data name="WatchMore" xml:space="preserve">
     <value>Смотри еще</value>

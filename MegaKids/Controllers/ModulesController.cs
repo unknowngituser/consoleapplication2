@@ -9,12 +9,6 @@ namespace MegaKids.WebUI.Controllers
 {
     public class ModulesController : DefaultController
     {
-        // GET: Modules
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         #region Слайдер
         public ActionResult SliderPartial(EnumSitePage sitePage)
         {

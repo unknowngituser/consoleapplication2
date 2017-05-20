@@ -13,11 +13,6 @@ namespace MegaKids.WebUI.Areas.Admin.Controllers
     [FilterUser(Roles = "Администратор")]
     public class ModulesController : DefaultController
     {
-        // GET: Admin/Modules
-        public ActionResult Index()
-        {
-            return View();
-        }
         #region Сайдер
         public ActionResult SliderManagement(EnumSitePage sitePage)
         {

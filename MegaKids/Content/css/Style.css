@@ -78,6 +78,7 @@
 
 .navbar-wrapper{
     position: relative;top: -70px;
+    margin-bottom: -40px;
 }
 
 
@@ -252,6 +253,10 @@ ol, ul {
     text-decoration:none;
 }
 
+.read-more {
+    text-align: right;
+}
+
 .read-more-button{
     padding-top:7px;
     width:240px;
@@ -269,21 +274,21 @@ ol, ul {
 }
 
 .paging-items{
-    width:30%;
-    margin:0 auto;
-    font:20px Akrobat,Akrobat-Regular;
+    
 }
 
 .paging-items li a.page-next{
     padding: 4px 10px 5px 25px;
     font-size: 20px;
     font-weight:bold;
+    margin-top: 10px;
 }
 
 .paging-items li a.page-prev{
     padding: 4px 30px 5px 15px;
     font-size: 20px;
     font-weight:bold;
+    margin-top: 10px;
 }
 
 .clear{

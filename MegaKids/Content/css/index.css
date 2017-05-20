@@ -10,14 +10,8 @@
     text-decoration:none;
 }
 
-.cafe-link-block .cafe-name {
-    position:relative;
-    top:12px;
-    margin: 0 auto;
-    background-image: url('../Images/cafe-name.png');
-    background-repeat:no-repeat;
-    width:519px;
-    height:342px;
+.cafe-logo{
+    top:10px;
 }
 
 .cafe-link-block .cafe-text{
@@ -26,30 +20,31 @@
     text-align:center;
 }
 
-.cafe-link-block .cafe-text span{
+.cafe-link-block .cafe-text h2{
     
-    font-size:61px;
+    font-size:8vmin;
     font-family:Lobster,Lobster-Regular;
     color:#ffffff;
+    line-height: 1;
 }
 
 /* Настройки слайдера */
 
-.container-slider{
+/*.container-slider{
     max-width:1920px;
     margin:0 auto;
-}
+}*/
 
 .container-slider .carousel .item {
-  height: 550px;
+  max-height: 550px;
 }
 
-.container-slider .item img {
+/*.container-slider .item img {
     position: absolute;
     top: 0;
     left: 0;
     min-height: 550px;
-}
+}*/
 
 #left-control{
     position: absolute;
@@ -91,7 +86,7 @@
 
 .slider-arrows img{
     max-width: 59px !important;
-    max-height: 113px !important;
+    /*max-height: 113px !important;*/
 }
 
 
@@ -130,18 +125,12 @@
 
 .home-description p{
     font-family:Akrobat,Akrobat-Regular;
-    font-size:28px;
+    font-size:1.8em;
     /*font-weight:bold;*/
     color:#006496;
 }
 
 /* Блок с последними новостями */
-.container-home-last-news{
-    width:1100px;
-    margin-right: auto;
-    margin-left: auto;
-    background-color:#FFFFFF;
-}
 
 .home-last-news-head{
     height:100px;
@@ -150,7 +139,7 @@
 
 .home-last-news-head h2{
     padding:15px 50px;
-    font:bold 49px Akrobat,Akrobat-Regular;
+    font:bold 8vmin Akrobat,Akrobat-Regular;
     text-transform:uppercase;
     color:#0a7fba;
     margin:0;
@@ -183,10 +172,9 @@
 .latest-news-link{
     background-color:#fbf8f8;
     display:block;
-    width:250px;
-    height: 400px;
     overflow:hidden;
     text-align:center;
+    margin-bottom: 15px;
 }
 
 .latest-news-link:hover{
@@ -231,7 +219,7 @@ p.latest-news-title{
 }
 
 .watch-more-news{
-    padding-top: 30px;
+    padding-top: 25px;
     text-align:center;
 }
 
@@ -293,4 +281,39 @@ p.latest-news-title{
     font:2em Akrobat,Akrobat-Regular,Akrobat-Light;
     color:#5393c3;
     letter-spacing:1px;
+}
+
+@media (min-width: 768px) {
+    .home-video {
+        max-width: 70%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .left-hand {
+        display: none;
+    }
+    .right-hand {
+        display: none;
+    }
+    .cafe-link-block {
+        padding-top: 40px;
+    }
+    .watch-more-news a {
+        font: normal 6vmin Akrobat,Akrobat-Regular, Akrobat-Light;
+    }
+    .slider-arrows img {
+        max-width: 30px !important;
+    }
+}
+
+@media (max-width: 451px) {
+    .slider-title {
+        font-size: 6vmin;
+    }
+
+    .slider-text {
+        font-size: 5vmin;
+    }
 }

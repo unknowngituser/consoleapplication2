@@ -3,7 +3,7 @@
 }
 
 .news-head{
-    padding-top:10px;
+    padding-top: 60px;
 }
 
 .news-content{
@@ -21,24 +21,21 @@
 
 .news-item{
     
-    margin-right:32.5px;
     margin-bottom:35px;
-    width:100%;
-    height:100%;
-    float:left;
+    
     overflow:hidden;
 }
 
 .news-item-link{
     background-color:#fbf8f8;
     display:block;
-    width:345px;
-    height:550px;
+    margin-bottom: 20px;
 }
 
 .news-item-link:hover{
     background-color:#f3f2f2;
     cursor:pointer;
+    text-decoration: none;
 }
 
 .news-item-last{
@@ -73,4 +70,11 @@ p.news-item-title{
 .container-news .watch-more-news{
     padding-top: 0;
     text-align:center;
+}
+
+@media (min-width: 992px) {
+    .news-item-link{
+        height: 550px;
+        overflow: hidden;
+    }
 }

@@ -40,8 +40,10 @@
 		background: url('Images/arrow-left.png');
 		width: 32px;
 		height: 54px;
-		top: 220px;
+		top: 40%;
 		cursor: pointer;
+	    z-index: 1000;
+	    left: 1%;
 	}
 
     .showcase-arrow-next
@@ -50,25 +52,16 @@
 		background: url('Images/arrow-right.png');
 		width: 32px;
 		height: 54px;
-		top: 220px;
+		top: 40%;
 		cursor: pointer;
-	}
-	
-	.showcase-arrow-previous
-	{
-		left: -130px;
+        z-index: 1000;
+        right: 1%;
 	}
 	
 	/*.showcase-arrow-previous:hover
 	{
 		background-position: 0px -34px;
 	}*/
-	
-	.showcase-arrow-next
-	{
-		right: -130px;
-		/*background-position: -34px 0;*/
-	}
 	
 	/*.showcase-arrow-next:hover
 	{

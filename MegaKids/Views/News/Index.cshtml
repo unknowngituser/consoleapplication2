@@ -14,14 +14,14 @@
 
 <!-- Блок с новостями -->
 <div class="container-news">
-    <div class="container-zero">
+    <div class="container">
         <div class="news-head">
             <h2>
                 @Resource.RecentNews
                 <img id="news-loading" style="display:none;margin: 0 0 10px 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
             </h2>
         </div>
-        <div class="news-content">
+        <div class="news-content full-width-img">
             <div class="row">
                 <div class="col-md-12">
                     <!-- ko foreach: List -->
@@ -53,20 +53,23 @@
             
             <div class="clear"></div>
         </div>
-        <div class="paging-items">
-            <ul class="pager">
-                <li class="previous">
-                    <a data-bind="click:PrevPage" class="btn blue page-prev">
-                        <i class="fa fa-angle-left"></i> @Resource.Back
-                    </a>
-                </li>
-                <li class="next">
-                    <a data-bind="click:NextPage" class="btn blue page-next">
-                        @Resource.Next <i class="fa fa-angle-right"></i>
-                    </a>
-                </li>
-            </ul>
+        <div class="col-md-4 col-md-offset-4">
+            <div class="paging-items">
+                <ul class="pager">
+                    <li class="previous">
+                        <a data-bind="click:PrevPage,style:{'float':($root.FilterTable().CurrentPage() >= model.FilterTable().CountPage())?'none':'left'},visible:($root.FilterTable().CurrentPage() > 1)" class="btn blue page-prev">
+                            <i class="fa fa-angle-left"></i> @Resource.Back
+                        </a>
+                    </li>
+                    <li class="next">
+                        <a data-bind="click:NextPage,style:{'float':($root.FilterTable().CurrentPage() <= 1)?'none':'right'},visible:($root.FilterTable().CurrentPage() < model.FilterTable().CountPage())" class="btn blue page-next">
+                            @Resource.Next <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+        
     </div>
     @*<div class="watch-more-news">
         <a href="#" class="btn blue">@Resource.WatchMore</a>
@@ -167,6 +170,7 @@
         moment.locale('@Lang.Id');
             ko.applyBindings(model);
             model.LoadData();
+        
         });
 </script>
 }

@@ -47,19 +47,21 @@
                 </div>
             </div>
             <div class="clear"></div>
-            <div class="paging-items">
-                <ul class="pager">
-                    <li class="previous">
-                        <a data-bind="click:PrevPage" class="btn blue page-prev">
-                            <i class="fa fa-angle-left"></i> @Resource.Back
-                        </a>
-                    </li>
-                    <li class="next">
-                        <a data-bind="click:NextPage" class="btn blue page-next">
-                            @Resource.Next <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-md-4 col-md-offset-4">
+                <div class="paging-items">
+                    <ul class="pager">
+                        <li class="previous">
+                            <a data-bind="click:PrevPage,style:{'float':($root.FilterTable().CurrentPage() >= model.FilterTable().CountPage())?'none':'left'},visible:($root.FilterTable().CurrentPage() > 1)" class="btn blue page-prev">
+                                <i class="fa fa-angle-left"></i> @Resource.Back
+                            </a>
+                        </li>
+                        <li class="next">
+                            <a data-bind="click:NextPage,style:{'float':($root.FilterTable().CurrentPage() <= 1)?'none':'right'},visible:($root.FilterTable().CurrentPage() < model.FilterTable().CountPage())" class="btn blue page-next">
+                                @Resource.Next <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -72,15 +74,18 @@
                 <h2>@Resource.Video</h2>
                 <img id="video-loading" style="display:none;margin: 0 0 20px 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
             </div>
-            <div id="showcase" class="showcase">
+            <div class="showcase-wrapper">
+                <div id="showcase" class="showcase embed-responsive embed-responsive-16by9">
                 
-                <!-- ko foreach: VideoList -->
+                    <!-- ko foreach: VideoList -->
                     <div class="showcase-slide">
                         <div class="showcase-content" data-bind="html:Video">
                         </div>
                     </div>
-                <!-- /ko -->
+                    <!-- /ko -->
+                </div>
             </div>
+            
         </div>
 
         
@@ -188,7 +193,7 @@
                             var item = new Album(data.List[i]);
                             model.AlbumList.push(item);
                         }
-                        var time = 200;
+                        var time = 300;
                         setTimeout(function () {
                             $('.Collage').removeWhitespace().collagePlus(
                             {

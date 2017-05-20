@@ -211,7 +211,6 @@
     <Content Include="fonts\Akrobat\Akrobat-Thin.otf" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Login.cshtml" />
     <Content Include="Areas\Admin\Views\News\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Template.cshtml" />
     <Content Include="Areas\Admin\Views\News\Management.cshtml" />

@@ -1,15 +1,41 @@
-﻿<!--  Блок с картой -->
+﻿<style>
+    .google-maps {
+        position: relative;
+        padding-bottom: 75%; /*// This is the aspect ratio*/
+        height: 0;
+        overflow: hidden;
+    }
+    .google-maps iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
+</style>
+<!--  Блок с картой -->
 <div class="container-map">
     <div class="container">
-        <div class="map-contacts">
-            <div class="map-marker"></div>
-            <p>@Resource.Map_Marker</p>
-            <div class="map-phone"></div>
-            <p>+373 79 00 00 00</p>
-            <div class="map-clock"></div>
-            <p>@Resource.Map_Time</p>
-            <p>10:00 - 22:00</p>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="google-maps">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1359.390561317239!2d28.86195936840058!3d47.04452561322018!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd74e01c7a9f6a387!2sSoiuz+%2B!5e0!3m2!1sru!2sus!4v1495486901741" width="900" height="400" frameborder="0" style="border: 0" allowfullscreen></iframe>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="map-contacts">
+                    <div class="map-marker"></div>
+                    <p>@Resource.Map_Marker</p>
+                    <div class="map-phone"></div>
+                    <p>+373 79 00 00 00</p>
+                    <div class="map-clock"></div>
+                    <p>@Resource.Map_Time</p>
+                    <p>10:00 - 22:00</p>
+                </div>
+            </div>
         </div>
+        
     </div>
 
 </div>

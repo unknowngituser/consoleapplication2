@@ -143,7 +143,7 @@ namespace MegaKids.Services.Admin
                     CreateDate = servicesRu.Services.CreateDate,
                     Photo = servicesRu.Services.Photo,
                     Ru_Title = servicesRu.Title,
-                    Ru_Content = servicesRo.Content,
+                    Ru_Content = servicesRu.Content,
                     Ro_Title = servicesRo.Title,
                     Ro_Content = servicesRo.Content
                 };

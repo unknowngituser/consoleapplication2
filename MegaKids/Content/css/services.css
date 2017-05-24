@@ -1,9 +1,10 @@
 ﻿.services-head {
-    height: 371px;
+    min-height: 371px;
     width: 100%;
-    background: #ffffff url('../Images/services-head.jpg') no-repeat scroll center top;
-    padding-top:55px;
-    font-family:Akrobat,Akrobat-Regular,Akrobat-Bold;
+    background: #9e3a3a url('../Images/services-head.jpg') no-repeat scroll center top;
+    padding-top: 55px;
+    padding-bottom: 10px;
+    font-family: Akrobat,Akrobat-Regular,Akrobat-Bold;
 }
 
 .services-head h1, .services-head h2{

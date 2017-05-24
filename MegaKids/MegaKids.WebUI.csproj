@@ -182,6 +182,7 @@
     <Content Include="Content\css\news.css" />
     <Content Include="Content\css\watchnews.css" />
     <Content Include="Content\Images\arrows.png" />
+    <Content Include="Content\Images\FB.svg" />
     <Content Include="Content\Images\gif\loading.gif" />
     <Content Include="Content\Images\header.jpg" />
     <Content Include="Content\Images\LogoRO.png" />

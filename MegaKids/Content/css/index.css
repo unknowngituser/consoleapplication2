@@ -244,9 +244,9 @@ p.latest-news-title{
 
 .container-map {
     width:100%;
-    height:450px;
+    /*height:450px;*/
     margin:0 auto;
-    background: #F6F6F6 url('../Images/map-background.jpg') no-repeat scroll center top;
+    /*background: #F6F6F6 url('../Images/map-background.jpg') no-repeat scroll center top;*/
 }
 
 .map-marker {
@@ -283,11 +283,29 @@ p.latest-news-title{
     letter-spacing:1px;
 }
 
+.google-maps {
+    position: relative;
+    padding-bottom: 75%; /*// This is the aspect ratio*/
+    height: 0;
+    overflow: hidden;
+}
+.google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
 @media (min-width: 768px) {
     .home-video {
         max-width: 70%;
         margin: 0 auto;
     }
+    div.google-maps {
+        padding-bottom: 55%;
+    }
+    
 }
 
 @media (max-width: 768px) {
@@ -305,6 +323,10 @@ p.latest-news-title{
     }
     .slider-arrows img {
         max-width: 30px !important;
+    }
+    .map-contacts p {
+        margin-right: 10px;
+        font: 1.8em Akrobat,Akrobat-Regular,Akrobat-Light;
     }
 }
 

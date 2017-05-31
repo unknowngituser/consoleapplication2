@@ -16,14 +16,19 @@
     a#btn-cafe {
         background-color: #57abe4;
     }
-    
+    *, *:after, *:before {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        transition: none;
+    }
 </style>
 <link rel="stylesheet/less" type="text/less" href="~/Content/css/multi-item-carousel.less" />   
 <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
 <div class="white-delimiter-h30"></div>
 <!-- Блок с описанием -->
 <div class="cafe-page">
-    <div class="container-cafe">
+    <div class="container">
         <div class="cafe-head row">
             <h1>@Model.Seo.Title</h1>
             <div class="cafe-icons col-md-12">
@@ -43,8 +48,8 @@
         </div>
         <div class="cafe-horizontal-line"></div>
         
-        <div class="container">
-            <div class="row" id="photos-list">
+        <div class="container" id="desktop-slider">
+            <div class="row photos-list">
                 @foreach (var album in Model.ModelCafeAlbum)
                 {
                     if (album.ChildPhotos.Count > 0)
@@ -88,7 +93,53 @@
     }
             </div>
         </div>
-        
+        <div class="container" id="device-slider">
+            <div class="row photos-list">
+                @foreach (var album in Model.ModelCafeAlbum)
+                {
+                    if (album.ChildPhotos.Count > 0)
+                    {
+                        <div class="col-md-12">
+                            <div class="cafe-album-head">
+                                <h1>@album.Name</h1>
+                            </div>
+                            <div class="container-slider">
+                                <div id="cafe-slider" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        @foreach (var photos in album.ChildPhotos)
+                                        {
+                                            <div class="item @{if (photos == album.ChildPhotos.FirstOrDefault()){<text>active</text>}}">
+                                                <div class="mix-grid thumbnails">
+                                                    <div class="mix">
+                                                        <div class="mix-inner">
+                                                            <img class="img-responsive" src="~/Content/Images/cafe-page/albums/@album.Id/photos/@photos.PhotoName" alt="">
+                                                            <div style="cursor:pointer;" class="mix-details mix-preview fancybox-button" href="~/Content/Images/cafe-page/albums/@album.Id/photos/@photos.PhotoName" title="" data-rel="fancybox-button">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    }
+                                    </div>
+                                    <!-- Переключатели -->
+                                    <a class="left carousel-control" href="#cafe-slider" role="button" data-slide="prev">
+                                        <div class="slider-arrows">
+                                            <img src="~/Content/Images/arrow-left.png" />
+                                        </div>
+                                    </a>
+                                    <a class="right carousel-control" href="#cafe-slider" role="button" data-slide="next">
+                                        <div class="slider-arrows">
+                                            <img src="~/Content/Images/arrow-right.png" />
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                }
+            </div>
+        </div>
         
     </div>
 </div>
@@ -110,6 +161,10 @@
 <script>
     // Instantiate the Bootstrap carousel
     $('.multi-item-carousel').carousel({
+        interval: false
+    });
+
+    $('.carousel').carousel({
         interval: false
     });
 

@@ -163,8 +163,14 @@
   <data name="Language" xml:space="preserve">
     <value>ru</value>
   </data>
+  <data name="Map_GameZone" xml:space="preserve">
+    <value>Zonă de joacă: ‎+373 785 000 28</value>
+  </data>
   <data name="Map_Marker" xml:space="preserve">
-    <value>Centrul comercial "Soiuz" 3 etaj</value>
+    <value>Centrul comercial "Soiuz", str. Alecu Russo 1, etaj - 4</value>
+  </data>
+  <data name="Map_Restaurant" xml:space="preserve">
+    <value>Restaurant: ‎+373 785 000 58</value>
   </data>
   <data name="Map_Time" xml:space="preserve">
     <value>Va așteptam in fiecare zi:</value>

@@ -163,8 +163,14 @@
   <data name="Language" xml:space="preserve">
     <value>ro</value>
   </data>
+  <data name="Map_GameZone" xml:space="preserve">
+    <value>Игровая зона: ‎+373 785 000 28</value>
+  </data>
   <data name="Map_Marker" xml:space="preserve">
-    <value>Торговый Центр “СОЮЗ” 3 этаж</value>
+    <value>Торговый Дом “СОЮЗ”, ул. Алеку Руссо, 1, этаж - 4</value>
+  </data>
+  <data name="Map_Restaurant" xml:space="preserve">
+    <value>Ресторан: ‎+373 785 000 58</value>
   </data>
   <data name="Map_Time" xml:space="preserve">
     <value>Ждём Вас ежедневно:</value>

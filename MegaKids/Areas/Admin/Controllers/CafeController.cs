@@ -67,5 +67,32 @@ namespace MegaKids.WebUI.Areas.Admin.Controllers
             AdminServices.Albums.DeleteSlider(SliderId, mapPath);
             return RedirectToAction("management", "cafe");
         }
+        [HttpPost]
+        public ActionResult GetCafeAlbumPhotosJson(int AlbumId)
+        {
+            try
+            {
+                var photoList = AdminServices.Albums.GetCafeAlbumPhotos(AlbumId);
+                return Json(photoList);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Error", ex.Message });
+            }
+        }
+        [HttpPost]
+        public ActionResult DeleteCafePhotoJson(int PhotoId)
+        {
+            string mapPath = Server.MapPath("~/Content/Images/cafe-page/albums/");
+            try
+            {
+                AdminServices.Albums.DeleteCafeAlbumPhoto(PhotoId, mapPath);
+                return Json("Успешно удалено");
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Error", ex.Message });
+            }
+        }
     }
 }

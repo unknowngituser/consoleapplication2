@@ -12,8 +12,7 @@ namespace DataModel.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false),
-                        Title = c.String(),
-                        Description = c.String(),
+                        PageName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

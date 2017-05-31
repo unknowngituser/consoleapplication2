@@ -99,11 +99,7 @@ namespace MegaKids.Services.Admin
                 {
                     CreateDate = (model.CreateDate != null) ? model.CreateDate : DateTime.Now
                 };
-                if (model.PhotoFile != null)
-                {
-                    services.Photo = model.PhotoFile.FileName;
-                    UploadModuleImage(model.PhotoFile, mapPath);
-                }
+                
                 db.Services.Add(services);
                 var servicesLangRu = new ServicesLanguage()
                 {
@@ -121,6 +117,10 @@ namespace MegaKids.Services.Admin
                     Content = model.Ro_Content
                 };
                 db.ServicesLanguages.Add(servicesLangRo);
+                if (model.PhotoFile != null)
+                {
+                    services.Photo = UploadModuleImage(model.PhotoFile, mapPath, services.Id);
+                }
                 db.SaveChanges();
             }
         }
@@ -166,10 +166,14 @@ namespace MegaKids.Services.Admin
                     .FirstOrDefault(_ => _.ServicesId == model.Id && _.LanguageId == EnumLanguage.ro);
                 if (model.PhotoFile != null)
                 {
-                    UploadModuleImage(model.PhotoFile, map);
-                    services.Photo = model.PhotoFile.FileName;
+                    var fullPath = Path.Combine(map, services.Photo);
+                    if (File.Exists(fullPath))
+                    {
+                        File.Delete(fullPath);
+                    }
+                    services.Photo = UploadModuleImage(model.PhotoFile, map, services.Id);
                 }
-                services.CreateDate = model.CreateDate;
+                services.CreateDate = (model.CreateDate != null) ? model.CreateDate : DateTime.Now;
 
                 servicesRu.Title = model.Ru_Title;
                 servicesRu.Content = model.Ru_Content;
@@ -194,15 +198,18 @@ namespace MegaKids.Services.Admin
             }
         }
 
-        private void UploadModuleImage(HttpPostedFileBase photoFile, string mapPath)
+        private string UploadModuleImage(HttpPostedFileBase photoFile, string mapPath, int id)
         {
             if (!Directory.Exists(mapPath))
             {
                 Directory.CreateDirectory(mapPath);
             }
-            var fileName = Path.GetFileName(photoFile.FileName);
-            var fullPath = Path.Combine(mapPath, fileName);
+            var fileName = Path.GetFileNameWithoutExtension(photoFile.FileName) + DateTime.Now.ToString("hh-mm-ss%FFF");
+            var fileExtention = Path.GetExtension(photoFile.FileName);
+            var fullFileName = (fileName + fileExtention);
+            var fullPath = Path.Combine(mapPath, fullFileName);
             photoFile.SaveAs(fullPath);
+            return fullFileName;
         }
 
         public static ModelServices ConvertToModelServices(ServicesLanguage model)
@@ -238,11 +245,7 @@ namespace MegaKids.Services.Admin
                 {
                     CreateDate = (model.CreateDate != null) ? model.CreateDate : DateTime.Now
                 };
-                if (model.PhotoFile != null)
-                {
-                    slider.Photo = model.PhotoFile.FileName;
-                    UploadModuleImage(model.PhotoFile, mapPath);
-                }
+                
                 db.Sliders.Add(slider);
                 var sliderLangRu = new SliderLanguage()
                 {
@@ -260,6 +263,10 @@ namespace MegaKids.Services.Admin
                     Content = model.Ro_Content
                 };
                 db.SliderLanguages.Add(sliderLangRo);
+                if (model.PhotoFile != null)
+                {
+                    slider.Photo = UploadModuleImage(model.PhotoFile, mapPath, slider.Id);
+                }
                 db.SaveChanges();
             }
         }
@@ -296,10 +303,10 @@ namespace MegaKids.Services.Admin
                     .FirstOrDefault(_ => _.SliderId == model.Id && _.LanguageId == EnumLanguage.ro);
                 if (model.PhotoFile != null)
                 {
-                    UploadModuleImage(model.PhotoFile, map);
-                    slider.Photo = model.PhotoFile.FileName;
+                    
+                    slider.Photo = UploadModuleImage(model.PhotoFile, map,slider.Id);
                 }
-                slider.CreateDate = model.CreateDate;
+                slider.CreateDate = (model.CreateDate != null) ? model.CreateDate : DateTime.Now;
 
                 sliderRu.Title = model.Ru_Title;
                 sliderRu.Content = model.Ru_Content;

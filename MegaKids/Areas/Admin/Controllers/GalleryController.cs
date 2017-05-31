@@ -3,6 +3,7 @@ using MegaKids.WebUI.Controllers;
 using MegaKids.WebUI.Infrastructura;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -109,6 +110,20 @@ namespace MegaKids.WebUI.Areas.Admin.Controllers
                 return Json(photoList);
             }
             catch(Exception ex)
+            {
+                return Json(new { Result = "Error", ex.Message });
+            }
+        }
+
+        public ActionResult DeletePhotoJson(int PhotoId)
+        {
+            string mapPath = Server.MapPath("~/Content/Images/gallery/albums/");
+            try
+            {
+                AdminServices.Albums.DeleteAlbumPhoto(PhotoId,mapPath);
+                return Json("Успешно удалено");
+            }
+            catch (Exception ex)
             {
                 return Json(new { Result = "Error", ex.Message });
             }

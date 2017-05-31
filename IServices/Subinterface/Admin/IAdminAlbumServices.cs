@@ -24,6 +24,8 @@ namespace MegaKids.IServices.Subinterface.Admin
 
         void UploadAlbumPhotos(HttpFileCollectionBase files, int albumId, string mapPath);
 
+        void DeleteAlbumPhoto(int photoId, string mapPath);
+
         void DeleteAlbum(int id);
         #region Видео
         List<ModelGalleryVideo> GetGalleryVideos();
@@ -34,11 +36,14 @@ namespace MegaKids.IServices.Subinterface.Admin
         #endregion
         #region Кафе
         List<ModelAlbum> GetCafeAlbumList();
+        List<ModelAlbum> GetCafeAlbumPhotos(int albumId);
         int CreateCafeAlbum(AlbumLang model);
         AlbumLang EditCafeAlbum(int id);
         void UpdateCafeAlbum(AlbumLang model);
         void UploadCafeAlbumPhotos(HttpFileCollectionBase files, int albumId, string mapPath);
         void DeleteSlider(int id, string mapPath);
+        void DeleteCafeAlbumPhoto(int photoId, string mapPath);
+
         #endregion
     }
 }

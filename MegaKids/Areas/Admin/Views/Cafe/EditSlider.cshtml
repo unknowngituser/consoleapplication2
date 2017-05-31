@@ -4,7 +4,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
-
+<link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/css/transitions.css" rel="stylesheet" />
+<link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/support/examples.css" rel="stylesheet" />
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -71,6 +72,7 @@
                             <div class="row">
                                 <div class="col-md-offset-2 col-md-10">
                                     <button type="button" id="Save-Changes" value="@Model.Id" class="btn blue">Сохранить</button>
+                                    <img id="is-loading" style="display:none;margin-left: 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
                                 </div>
                             </div>
                         </div>
@@ -119,10 +121,18 @@
 
                 </div>
 
-                <!-- The table listing the files available for upload/download -->
-                @*<table role="presentation" class="table table-striped clearfix">
-                        <tbody class="files"></tbody>
-                    </table>*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="Collage">
+                            <!-- ko foreach: PhotosList -->
+                            <div class="Image_Wrapper">
+                                <button data-bind="click:DeletePhoto" class="btn btn-circle btn-danger fa fa-trash-o" style="color: #000;position: absolute;right: 12px;top: 12px;" title="Удалить"></button>
+                                <img data-bind="attr:{src:'/Content/Images/cafe-page/albums/'+$parent.AlbumId+'/photos/'+PhotoName()}" style="max-width: 300px;">
+                            </div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -138,68 +148,141 @@
         $('#site-cafe').addClass("active open");
         $('#cafe-management').addClass("active");
     </script>
-
+    <script src="~/Scripts/bootbox.min.js"></script>
     <script src="~/Content/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
     <script src="~/Content/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
 
     <script src="~/Content/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
-
+    <script src="~/Scripts/knockout-3.4.2.js"></script>
+    <script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/jquery.collagePlus.js"></script>
+    <script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/extras/jquery.removeWhitespace.js"></script>
+    <script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/extras/jquery.collageCaption.js"></script>
     <script>
     
-    $('#UploadFiles').click(function () {
-        files = document.getElementById('AlbumFiles').files;
-        var data = new FormData();
-        $.each(files, function (i, file) {
-            data.append('file'+i, file);
+        $('#UploadFiles').click(function () {
+            files = document.getElementById('AlbumFiles').files;
+            var data = new FormData();
+            $.each(files, function (i, file) {
+                data.append('file'+i, file);
+            });
+            data.append('AlbumId', $(this).val());
+
+            $.ajax({
+                beforeSend: function () {
+                    console.log('priv');
+                    $('#progressAnim').addClass("progress-striped active");
+                    $('#progressBar').css("opacity", 1);
+                    $('#iconSuccess').hide();
+                },
+
+                url: '@Url.Action("UploadSliderPhotos", "cafe", new { Area = "Admin" })',
+                type: 'post',
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (data) {
+                    console.log(data);
+                    $('#iconSuccess').show();
+                    $('#progressAnim').removeClass("progress-striped active");
+                    model.LoadData();
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
         });
-        data.append('AlbumId', $(this).val());
 
-        $.ajax({
-            beforeSend: function () {
-                console.log('priv');
-                $('#progressAnim').addClass("progress-striped active");
-                $('#progressBar').css("opacity", 1);
-                $('#iconSuccess').hide();
-            },
+        $('#Save-Changes').click(function () {
+            $('#is-loading').show();
+            var data = new FormData();
+            data.append("Id", $(this).val());
+            data.append("Ru_Title", $("#Ru_Title").val());
+            data.append("Ro_Title", $("#Ro_Title").val());
 
-            url: '@Url.Action("UploadSliderPhotos", "cafe", new { Area = "Admin" })',
-            type: 'post',
-            contentType: false,
-            processData: false,
-            data: data,
-            success: function (data) {
-                console.log(data);
-                $('#iconSuccess').show();
-                $('#progressAnim').removeClass("progress-striped active");
-
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText);
+            $.ajax({
+                url: '@Url.Action("updateslider", "cafe", new { Area = "Admin" })',
+                type: 'post',
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (data) {
+                    document.location.href = "@Url.Action("management","cafe", new { Area = "Admin" })";
+                    console.log(data);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
+    <script>
+        var Photo = function (data) {
+            var proto = {
+                PhotoName: ''
             }
-        });
-    });
+            $.extend(proto, data);
+            var self = this;
 
-    $('#Save-Changes').click(function () {
-        var data = new FormData();
-        data.append("Id", $(this).val());
-        data.append("Ru_Title", $("#Ru_Title").val());
-        data.append("Ro_Title", $("#Ro_Title").val());
+            this.Id = ko.observable(proto.Id);
+            this.PhotoName = ko.observable(proto.PhotoName);
+            this.DeletePhoto = function() {
+                bootbox.confirm("Вы действительно хотите удалить изображение?", function (e) {
+                    if (e) {
+                        $.ajax({
+                            method: "POST",
+                            processdata: false,
+                            contentType: false,
+                            url: '@Url.Action("DeleteCafePhotoJson", "cafe", new { Area = "Admin" })?PhotoId=' + self.Id(),
+                            success: function (data) {
+                                model.LoadData();
+                            },
+                            error: function (xhr) {
+                                console.log(xhr.responseText);
+                            }
+                        });
+                    }
+                });
+            };
+        }
 
-        $.ajax({
-            url: '@Url.Action("updateslider", "cafe", new { Area = "Admin" })',
-            type: 'post',
-            contentType: false,
-            processData: false,
-            data: data,
-            success: function (data) {
-                document.location.href = "@Url.Action("management","cafe", new { Area = "Admin" })";
-                console.log(data);
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText);
+        var model = {
+            PhotosList: ko.observableArray([]),
+            AlbumId: '@Model.Id',
+            LoadData: function () {
+
+                $.ajax({
+                    method: "POST",
+                    processdata: false,
+                    contentType: false,
+                    url: '@Url.Action("GetCafeAlbumPhotosJson", "Cafe", new { Area = "Admin" })?AlbumId='+model.AlbumId,
+                    success: function (data) {
+                        model.PhotosList.removeAll();
+                        for (var i in data) {
+                            var item = new Photo(data[i]);
+                            model.PhotosList.push(item);
+                        }
+                        var time = 400;
+                        setTimeout(function () {
+                            $('.Collage').removeWhitespace().collagePlus(
+                                {
+                                    'fadeSpeed': 2000,
+                                    'targetHeight': 200,
+                                    'effect': 'effect-4',
+                                    'allowPartialLastRow': true
+                                });
+                        }, time);
+                        console.log('data', model.PhotosList());
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
             }
+        };
+        $(function () {
+            ko.applyBindings(model);
+            model.LoadData();
         });
-    });
     </script>
     <!-- END JAVASCRIPTS -->
 }

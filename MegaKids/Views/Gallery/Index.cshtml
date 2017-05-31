@@ -34,7 +34,7 @@
     </div>*@
     <div class="mix">
         <div class="mix-inner">
-            <img data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()},visible:$parent.IsShowAlbum" style="width:auto;" alt="">
+            <img data-bind="attr:{src: '/Content/Images/gallery/albums/'+Id()+'/'+PhotoName()},visible:$parent.IsShowAlbum" style="max-width: 500px;" alt="">
             <a data-bind="attr:{href:'/gallery/albums/'+Id()}">
                 <div class="mix-details" title="Перейти к фотографиям">
                     <h2 data-bind="text:Name"></h2>
@@ -193,7 +193,7 @@
                             var item = new Album(data.List[i]);
                             model.AlbumList.push(item);
                         }
-                        var time = 300;
+                        var time = 400;
                         setTimeout(function () {
                             $('.Collage').removeWhitespace().collagePlus(
                             {
@@ -203,12 +203,12 @@
                                 'allowPartialLastRow': true
                             });
                             model.IsShowAlbum(true);
+                            model.FilterTable().CountItems(data.CountItems);
+                            model.FilterTable().CountPage(data.CountPage);
+                            $("#album-loading").hide();
                         } ,time);
                         
-                        model.FilterTable().CountItems(data.CountItems);
-                        model.FilterTable().CountPage(data.CountPage);
-                        setTimeout(function () { $('.category_1').css("opacity", 1); }, 500);
-                        $("#album-loading").hide();
+                        
                     }
                 });
             },

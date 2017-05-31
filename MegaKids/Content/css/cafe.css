@@ -65,7 +65,7 @@
     width: 0;
 }
 
-#photos-list .mix-grid .mix .mix-details {
+.photos-list .mix-grid .mix .mix-details {
     cursor: url('../Images/gallery/cursor-pl.png'), zoom-in !important;
     background: none !important;
     height:100% !important;
@@ -96,7 +96,7 @@
 }
 
 .cafe-description{
-    padding-top: 5px;
+    padding-top: 25px;
     padding-bottom: 40px;
     text-align:center;
 }
@@ -112,3 +112,35 @@
     line-height: 1.5;
 }
 
+@media (min-width: 768px) {
+    #device-slider {
+        display: none;
+    }
+    
+}
+
+@media (max-width: 768px) {
+    #desktop-slider {
+        display: none;
+    }
+    .cafe-head h1, .cafe-album-head h1 {
+        font: 40px Lobster,Lobster-Regular;
+        margin: 15px 0 5px 0;
+    }
+    .cafe-head h3 {
+        font: 34px Lobster,Lobster-Regular;
+    }
+    .container-cafe-description {
+        margin-top: 50px;
+    }
+}
+
+#device-slider .carousel-control.left{
+    left: 2px;
+    top: 38%;
+}
+
+#device-slider .carousel-control.right{
+    right: 32px;
+    top: 38%;
+}

@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css" href="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" />
 <link href="~/Content/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
 
+<link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/css/transitions.css" rel="stylesheet" />
+<link href="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/support/examples.css" rel="stylesheet" />
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -127,6 +129,7 @@
                             <div class="row">
                                 <div class="col-md-offset-2 col-md-10">
                                     <button type="button" id="Save-Changes" value="@Model.Id" class="btn blue">Сохранить</button>
+                                    <img id="is-loading" style="display:none;margin-left: 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
                                 </div>
                             </div>
                         </div>
@@ -175,25 +178,13 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-3">
-                            <div class="album-item" style="width:100%;height:80px;background-color:#00ff21;">
-
+                        <div class="Collage">
+                            <!-- ko foreach: PhotosList -->
+                            <div class="Image_Wrapper">
+                                <button data-bind="click:DeletePhoto" class="btn btn-circle btn-danger fa fa-trash-o" style="color: #000;position: absolute;right: 12px;top: 12px;" title="Удалить"></button>
+                                <img data-bind="attr:{src:'/Content/Images/gallery/albums/'+$parent.AlbumId+'/photos/'+PhotoName()}" style="max-width: 300px;">
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="album-item" style="width:100%;height:80px;background-color:#00ff21;">
-
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="album-item" style="width:100%;height:80px;background-color:#00ff21;">
-
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="album-item" style="width:100%;height:80px;background-color:#00ff21;">
-
-                            </div>
+                            <!--/ko-->
                         </div>
                     </div>
                 </div>
@@ -209,12 +200,12 @@
 @section scripts{
     <script src="~/Scripts/moment-with-locales.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
-
+    <script src="~/Scripts/bootbox.min.js"></script>
     <script type="text/javascript" src="~/Content/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 
     <script>
         $('#site-gallery').addClass("active open");
-        $('#gallery-add').addClass("active");
+        $('#gallery-edit').addClass("active");
     </script>
 
     <script src="~/Content/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
@@ -223,6 +214,9 @@
     <script src="~/Content/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
 
     <script src="~/Scripts/knockout-3.4.2.js"></script>
+    <script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/jquery.collagePlus.js"></script>
+    <script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/extras/jquery.removeWhitespace.js"></script>
+    <script src="~/Content/assets/global/plugins/ed-lea-jquery-collagePlus/extras/jquery.collageCaption.js"></script>
     <script>
     jQuery(document).ready(function () {
 
@@ -255,7 +249,7 @@
                 console.log(data);
                 $('#iconSuccess').show();
                 $('#progressAnim').removeClass("progress-striped active");
-
+                model.LoadData();
             },
             error: function (xhr) {
                 console.log(xhr.responseText);
@@ -263,7 +257,8 @@
         });
     });
 
-    $('#Save-Changes').click(function () {
+        $('#Save-Changes').click(function () {
+        $('#is-loading').show();
         files = document.getElementById('PhotoFile').files;
         var data = new FormData();
         data.append("Id", $(this).val());
@@ -297,27 +292,56 @@
             $.extend(proto, data);
             var self = this;
 
+            this.Id = ko.observable(proto.Id);
             this.PhotoName = ko.observable(proto.PhotoName);
-
+            this.DeletePhoto = function() {
+                bootbox.confirm("Вы действительно хотите удалить изображение?", function (e) {
+                    if (e) {
+                        $.ajax({
+                            method: "POST",
+                            processdata: false,
+                            contentType: false,
+                            url: '@Url.Action("DeletePhotoJson","Gallery", new { Area = "Admin" })?PhotoId=' + self.Id(),
+                            success: function (data) {
+                                model.LoadData();
+                            },
+                            error: function (xhr) {
+                                console.log(xhr.responseText);
+                            }
+                        });
+                    }
+                });
+            };
         }
-        
+
         var model = {
             PhotosList: ko.observableArray([]),
+            AlbumId: '@Model.Id',
             LoadData: function () {
-                
+
                 $.ajax({
                     method: "POST",
                     //datatype: "json",
                     processdata: false,
                     contentType: false,
-                    data: { AlbumId: 1 },
-                    url: '@Url.Action("GetAlbumPhotosJson","Gallery", new { Area = "Admin" })',
+                    //data: { AlbumId: 1 },
+                    url: '@Url.Action("GetAlbumPhotosJson","Gallery", new { Area = "Admin" })?AlbumId='+model.AlbumId,
                     success: function (data) {
                         model.PhotosList.removeAll();
                         for (var i in data) {
                             var item = new Photo(data[i]);
                             model.PhotosList.push(item);
                         }
+                        var time = 400;
+                        setTimeout(function () {
+                            $('.Collage').removeWhitespace().collagePlus(
+                                {
+                                    'fadeSpeed': 2000,
+                                    'targetHeight': 200,
+                                    'effect': 'effect-4',
+                                    'allowPartialLastRow': true
+                                });
+                        }, time);
                         console.log('data', model.PhotosList());
                     },
                     error: function (xhr) {

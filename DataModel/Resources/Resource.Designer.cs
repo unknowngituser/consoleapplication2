@@ -196,11 +196,29 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Торговый Центр “СОЮЗ” 3 этаж.
+        ///   Ищет локализованную строку, похожую на Игровая зона: ‎+373 785 000 28.
+        /// </summary>
+        public static string Map_GameZone {
+            get {
+                return ResourceManager.GetString("Map_GameZone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Торговый Дом “СОЮЗ”, ул. Алеку Руссо, 1, этаж - 4.
         /// </summary>
         public static string Map_Marker {
             get {
                 return ResourceManager.GetString("Map_Marker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ресторан: ‎+373 785 000 58.
+        /// </summary>
+        public static string Map_Restaurant {
+            get {
+                return ResourceManager.GetString("Map_Restaurant", resourceCulture);
             }
         }
         

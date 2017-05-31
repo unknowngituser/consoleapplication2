@@ -23,7 +23,7 @@ namespace MegaKids.Services.Admin
             using (var db = new DataContext())
             {
                 var photos = db.Albums.Where(x => x.ParentId == albumId).ToList();
-                var result = photos.Select(x => new ModelAlbum() { PhotoName = x.PhotoName }).ToList();
+                var result = photos.Select(x => new ModelAlbum() { Id = x.Id, PhotoName = x.PhotoName }).ToList();
                 return result;
             }
         }
@@ -48,10 +48,6 @@ namespace MegaKids.Services.Admin
                 {
                     CreateDate = (model.CreateDate == null) ? DateTime.Now : model.CreateDate
                 };
-                if (model.PhotoFile != null)
-                {
-                    album.PhotoName = model.PhotoFile.FileName;
-                }
                 db.Albums.Add(album);
                 var albumRu = new AlbumLanguage()
                 {
@@ -70,8 +66,9 @@ namespace MegaKids.Services.Admin
                 db.SaveChanges();
                 if (model.PhotoFile != null)
                 {
-                    UploadAlbumImage(album.Id, model.PhotoFile, mapPath);
+                    album.PhotoName = UploadAlbumImage(album.Id, model.PhotoFile, mapPath);
                 }
+                db.SaveChanges();
                 return album.Id;
             }
         }
@@ -107,8 +104,7 @@ namespace MegaKids.Services.Admin
                     .FirstOrDefault(_ => _.AlbumId == model.Id && _.LanguageId == EnumLanguage.ro);
                 if (model.PhotoFile != null)
                 {
-                    UploadAlbumImage(model.Id, model.PhotoFile, mapPath);
-                    album.PhotoName = model.PhotoFile.FileName;
+                    album.PhotoName = UploadAlbumImage(model.Id, model.PhotoFile, mapPath);
                 }
                 album.CreateDate = (model.CreateDate == null) ? DateTime.Now : model.CreateDate;
 
@@ -130,18 +126,35 @@ namespace MegaKids.Services.Admin
                 foreach (string file in files)
                 {
                     var upload = files[file];
-                    var fileName = Path.GetFileName(upload.FileName);
-                    var fullPath = Path.Combine(path, fileName);
+                    var fileName = Path.GetFileNameWithoutExtension(upload.FileName)+DateTime.Now.ToString("hh-mm-ss%FFF");
+                    var fileExtention = Path.GetExtension(upload.FileName);
+                    var fullFileName = (fileName + fileExtention);
+                    var fullPath = Path.Combine(path, fullFileName);
                     db.Albums.Add(new Album()
                     {
                         CreateDate = DateTime.Now,
                         ParentId = albumId,
-                        PhotoName = fileName
+                        PhotoName = fullFileName
                     });
                     upload.SaveAs(fullPath);
                 }
                 db.SaveChanges();
             }            
+        }
+
+        public void DeleteAlbumPhoto(int photoId, string mapPath)
+        {
+            using (var db = new DataContext())
+            {
+                var albumPhoto = db.Albums.FirstOrDefault(x => x.Id == photoId);
+                var fullPath = Path.Combine(mapPath, albumPhoto.ParentId.ToString(), "photos", albumPhoto.PhotoName);
+                db.Albums.Remove(albumPhoto);
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+                db.SaveChanges();
+            }
         }
 
         public void DeleteAlbum(int id)
@@ -170,16 +183,19 @@ namespace MegaKids.Services.Admin
             };
         }
 
-        public void UploadAlbumImage(int id, HttpPostedFileBase image, string mapPath)
+        public string UploadAlbumImage(int id, HttpPostedFileBase image, string mapPath)
         {
             string path = mapPath + id;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-            var fileName = Path.GetFileName(image.FileName);
-            var fullPath = Path.Combine(path, fileName);
+            var fileName = Path.GetFileNameWithoutExtension(image.FileName) + DateTime.Now.ToString("hh-mm-ss%FFF");
+            var fileExtention = Path.GetExtension(image.FileName);
+            var fullFileName = (fileName + fileExtention);
+            var fullPath = Path.Combine(path, fullFileName);
             image.SaveAs(fullPath);
+            return fullFileName;
         }
         #region Видео
         public List<ModelGalleryVideo> GetGalleryVideos()
@@ -296,6 +312,16 @@ namespace MegaKids.Services.Admin
             }
         }
 
+        public List<ModelAlbum> GetCafeAlbumPhotos(int albumId)
+        {
+            using (var db = new DataContext())
+            {
+                var photos = db.CafeAlbums.Where(x => x.ParentId == albumId).ToList();
+                var result = photos.Select(x => new ModelAlbum() { Id = x.Id, PhotoName = x.PhotoName }).ToList();
+                return result;
+            }
+        }
+
         public int CreateCafeAlbum(AlbumLang model)
         {
             using (var db = new DataContext())
@@ -354,6 +380,20 @@ namespace MegaKids.Services.Admin
                 db.SaveChanges();
             }
         }
+        public void DeleteCafeAlbumPhoto(int photoId, string mapPath)
+        {
+            using (var db = new DataContext())
+            {
+                var albumPhoto = db.CafeAlbums.FirstOrDefault(x => x.Id == photoId);
+                var fullPath = Path.Combine(mapPath, albumPhoto.ParentId.ToString(), "photos", albumPhoto.PhotoName);
+                db.CafeAlbums.Remove(albumPhoto);
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+                db.SaveChanges();
+            }
+        }
 
         public void DeleteSlider(int id, string mapPath)
         {
@@ -400,13 +440,15 @@ namespace MegaKids.Services.Admin
                 foreach (string file in files)
                 {
                     var upload = files[file];
-                    var fileName = Path.GetFileName(upload.FileName);
-                    var fullPath = Path.Combine(path, fileName);
+                    var fileName = Path.GetFileNameWithoutExtension(upload.FileName) + DateTime.Now.ToString("hh-mm-ss%FFF");
+                    var fileExtention = Path.GetExtension(upload.FileName);
+                    var fullFileName = (fileName + fileExtention);
+                    var fullPath = Path.Combine(path, fullFileName);
                     db.CafeAlbums.Add(new CafeAlbum()
                     {
                         CreateDate = DateTime.Now,
                         ParentId = albumId,
-                        PhotoName = fileName
+                        PhotoName = fullFileName
                     });
                     upload.SaveAs(fullPath);
                 }

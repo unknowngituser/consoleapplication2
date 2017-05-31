@@ -64,7 +64,16 @@ namespace MegaKids.Services.Admin
                 };
                 db.NewsLanguages.Add(newsLangRo);
                 db.SaveChanges();
-                if (model.PhotoFile != null) { UploadNewsImage(news.Id, model.PhotoFile, mapPath); }
+                if (model.PhotoFile != null)
+                {
+                    var fullPath = Path.Combine(mapPath, news.Photo);
+                    if (File.Exists(fullPath))
+                    {
+                        File.Delete(fullPath);
+                    }
+                    news.Photo = UploadNewsImage(news.Id, model.PhotoFile, mapPath);
+                }
+                db.SaveChanges();
             }
         }
         /// <summary>
@@ -115,10 +124,14 @@ namespace MegaKids.Services.Admin
                     .FirstOrDefault(_ => _.NewsId == model.Id && _.LanguageId == EnumLanguage.ro);
                 if (model.PhotoFile != null)
                 {
-                    UploadNewsImage(model.Id, model.PhotoFile, map);
-                    news.Photo = model.PhotoFile.FileName;
+                    var fullPath = Path.Combine(map, news.Photo);
+                    if (File.Exists(fullPath))
+                    {
+                        File.Delete(fullPath);
+                    }
+                    news.Photo = UploadNewsImage(model.Id, model.PhotoFile, map);
                 }
-                news.CreateDate = model.CreateDate;
+                news.CreateDate = model.CreateDate == null ? DateTime.Now : model.CreateDate;
                 
                 newsRu.Title = model.Ru_Title;
                 newsRu.Seo_Keywords = model.Ru_Seo_Keywords;
@@ -168,10 +181,12 @@ namespace MegaKids.Services.Admin
                 {
                     Directory.CreateDirectory(mapPath + folder);
                 }
-                var fileName = Path.GetFileName(upload.FileName);
-                var path = Path.Combine(mapPath + "/" + folder, fileName);
+                var fileName = Path.GetFileNameWithoutExtension(upload.FileName) + DateTime.Now.ToString("hh-mm-ss%FFF");
+                var fileExtention = Path.GetExtension(upload.FileName);
+                var fullFileName = (fileName + fileExtention);
+                var path = Path.Combine(mapPath, folder, fullFileName);
                 upload.SaveAs(path);
-                var url = string.Format("{0}{1}/{2}/{3}/{4}", "http://", host, uploadFolder, folder, fileName);
+                var url = string.Format("{0}{1}/{2}/{3}/{4}", "http://", host, uploadFolder, folder, fullFileName);
                 const string message = "Ваше изображение успешно загружено";
                 // Ajax запрос для передачи изображение
                 var output = string.Format(
@@ -180,16 +195,19 @@ namespace MegaKids.Services.Admin
                 return output;
             }
         }
-        public void UploadNewsImage(int id, HttpPostedFileBase image, string mapPath)
+        public string UploadNewsImage(int id, HttpPostedFileBase image, string mapPath)
         {
             string path = mapPath + id;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-            var fileName = Path.GetFileName(image.FileName);
-            var fullPath = Path.Combine(path, fileName);
+            var fileName = Path.GetFileNameWithoutExtension(image.FileName) + DateTime.Now.ToString("hh-mm-ss%FFF");
+            var fileExtention = Path.GetExtension(image.FileName);
+            var fullFileName = (fileName + fileExtention);
+            var fullPath = Path.Combine(path, fullFileName);
             image.SaveAs(fullPath);
+            return fullFileName;
         }
         
 

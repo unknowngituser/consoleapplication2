@@ -153,7 +153,8 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-2 col-md-10">
-                                <button type="button" id="Save-News" value="@Model.Id" class="btn blue">Сохранить</button>
+                                <button type="button" id="Save-Services" value="@Model.Id" class="btn blue">Сохранить</button>
+                                <img id="is-loading" style="display:none;margin-left: 15px;" src="~/Content/Images/gif/loading.gif" width="35" />
                             </div>
                         </div>
                     </div>
@@ -206,7 +207,8 @@
         $(function() {
             ComponentsFormTools.init();
 
-            $('#Save-News').click(function () {
+            $('#Save-Services').click(function () {
+                $('#is-loading').show();
                 for (instance in CKEDITOR.instances) {
                     CKEDITOR.instances[instance].updateElement();
                 }

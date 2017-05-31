@@ -12,12 +12,12 @@ namespace MegaKids.WebUI.Controllers
     public class GalleryController : DefaultController
     {
         // GET: Gallery
-        public ActionResult Index()
+        public ActionResult Index(TableFilterModel data)
         {
             var model = new ModelGallery()
             {
                 Seo = MainServices.Modules.GetCurrentPageSeo(CurrentLang.Id, EnumSitePage.Gallery),
-                //Photos = MainServices.Albums.GetAlbumList(CurrentLang),
+                //Albums = MainServices.Albums.GetAlbumList(data,CurrentLang),
                 Videos = MainServices.Albums.GetGalleryVideos(CurrentLang)
             };
 

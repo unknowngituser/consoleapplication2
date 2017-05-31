@@ -123,7 +123,7 @@
     margin:-44px -265px 0 0;
 }
 
-.home-description p{
+.home-description p, .home-description li{
     font-family:Akrobat,Akrobat-Regular;
     font-size:1.8em;
     /*font-weight:bold;*/
@@ -249,36 +249,31 @@ p.latest-news-title{
     /*background: #F6F6F6 url('../Images/map-background.jpg') no-repeat scroll center top;*/
 }
 
-.map-marker {
-    width:30px;
-    height:42px;
-    background: url('../Images/map-marker.png') no-repeat;
+img.map-marker {
+    width:28px;
 }
 
-.map-phone {
+img.map-phone {
+    width:35px;
+}
+
+img.map-clock {
     width:37px;
-    height:38px;
-    background: url('../Images/map-phone.png') no-repeat;
-}
-
-.map-clock {
-    width:39px;
-    height:39px;
-    background: url('../Images/map-clock.png') no-repeat;
 }
 
 .map-contacts{
     padding-top:25px;
+    padding-right: 13px;
     text-align:right;
 }
 
-.map-contacts div{
-    display:inline-block;
+.map-contacts img{
     margin-right:15px;
+    vertical-align: inherit;
 }
 
 .map-contacts p{
-    font:2em Akrobat,Akrobat-Regular,Akrobat-Light;
+    font:1.8em Akrobat,Akrobat-Regular,Akrobat-Light;
     color:#5393c3;
     letter-spacing:1px;
 }
@@ -324,9 +319,23 @@ p.latest-news-title{
     .slider-arrows img {
         max-width: 30px !important;
     }
+    .map-contacts {
+        padding-right: 0;
+    }
     .map-contacts p {
         margin-right: 10px;
-        font: 1.8em Akrobat,Akrobat-Regular,Akrobat-Light;
+        font: 1.6em Akrobat,Akrobat-Regular,Akrobat-Light;
+    }
+    img.map-marker {
+        width:25px;
+    }
+
+    img.map-phone {
+        width:30px;
+    }
+
+    img.map-clock {
+        width:30px;
     }
 }
 

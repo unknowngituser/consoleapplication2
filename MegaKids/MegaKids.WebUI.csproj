@@ -299,6 +299,7 @@
     <Content Include="Views\Gallery\RecentAlbumsPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutCafe.cshtml" />
     <Content Include="Views\Gallery\TestCollage.cshtml" />
+    <Content Include="Views\Home\qwertyxz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

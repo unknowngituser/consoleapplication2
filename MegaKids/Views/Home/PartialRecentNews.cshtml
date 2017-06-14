@@ -16,14 +16,7 @@
                             @news.Title
                         </p>
                         <div class="latest-news-content">
-                            @if (news.PreviewContent == null || news.PreviewContent == "")
-                            {
-                                @Html.Raw(news.NewsContent)
-                            }
-                            else
-                            {
-                                <p>@news.PreviewContent</p>
-                            }
+                            <p>@news.PreviewContent</p>
                         </div>
                     </div>
                 </a>

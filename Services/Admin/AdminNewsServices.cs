@@ -124,10 +124,13 @@ namespace MegaKids.Services.Admin
                     .FirstOrDefault(_ => _.NewsId == model.Id && _.LanguageId == EnumLanguage.ro);
                 if (model.PhotoFile != null)
                 {
-                    var fullPath = Path.Combine(map, news.Photo);
-                    if (File.Exists(fullPath))
+                    if (!string.IsNullOrEmpty(news.Photo))
                     {
-                        File.Delete(fullPath);
+                        var fullPath = Path.Combine(map, news.Photo);
+                        if (File.Exists(fullPath))
+                        {
+                            File.Delete(fullPath);
+                        }
                     }
                     news.Photo = UploadNewsImage(model.Id, model.PhotoFile, map);
                 }

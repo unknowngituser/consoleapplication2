@@ -1,0 +1,51 @@
+﻿<div class="container">
+    <div class="watchnews-head">
+        <h1 class="watchnews-title">26</h1>
+        <p class="watchnews-createdate">Добавлено: 03.06.2017</p>
+        <div class="image-wrapper col-md-12">
+            <img src="/Content/Images/NewsImages/6/happy-birthday-408-09-4102.jpg">
+        </div>
+                        
+    </div>
+    <div class="clear"></div>
+    <div class="news-video">
+        <div class="embed-responsive embed-responsive-16by9">
+            <p style="text-align: center">
+                <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/MmFVZUq8-bY" width="560"></iframe>
+            </p>
+
+            <div class="videoEmbed" style="text-align: center;">&nbsp;</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="white-delimiter"></div>
+@Html.Action("_mapContacts", "About")
+<div class="white-delimiter"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-7">
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMegaKids.md%2F&tabs&height=230&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" height="230" style="width: 100%;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        </div>
+    </div>
+</div>
+
+<div id="fb-root"></div>
+<div class="fb-page" data-href="https://www.facebook.com/MegaKids.md/" data-width="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/MegaKids.md/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/MegaKids.md/">MegaKids</a></blockquote></div>
+
+@section scripts
+{
+    
+    <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.9";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+}

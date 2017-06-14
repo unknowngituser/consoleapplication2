@@ -17,5 +17,11 @@ namespace MegaKids.IServices.Subinterface.Public
 
         List<ModelSlider> GetSliderList(EnumLanguage lang, EnumSitePage sitePage);
 
+        /// <summary>
+        /// Получить контакты
+        /// </summary>
+        /// <param name="lang"></param>
+        /// <returns></returns>
+        ModelSeoDescription GetContacts(EnumLanguage lang);
     }
 }

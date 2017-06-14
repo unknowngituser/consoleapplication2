@@ -35,14 +35,9 @@
                                     @Resource.Added: <span data-bind="text:moment(CreateDate()).format('ll')"></span>
                                 </p>
                                 <p class="news-item-title" data-bind="text:Title"></p>
-                                <!-- ko if: !PreviewContent()-->
-                                <div class="news-item-content" data-bind="html:NewsContent()"></div>
-                                <!--/ko-->
-                                <!-- ko if: PreviewContent() -->
                                 <div class="news-item-content">
                                     <p data-bind="text:PreviewContent"></p>
                                 </div>
-                                <!--/ko-->
                             </div>
                         </a>
                     </div>

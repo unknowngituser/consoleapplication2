@@ -32,6 +32,22 @@ namespace MegaKids.Services.Public
                 return result;
             }
         }
+        /// <summary>
+        /// Получить контакты
+        /// </summary>
+        /// <param name="lang"></param>
+        /// <returns></returns>
+        public ModelSeoDescription GetContacts(EnumLanguage lang)
+        {
+            using (var db = new DataContext())
+            {
+                var contacts = db.SeoDescriptionLanguages
+                    .Where(x => x.LanguageId == lang && x.SeoDescriptionId == EnumSitePage.About)
+                    .Select(x=>new ModelSeoDescription {ExtraContent = x.ExtraContent})
+                    .FirstOrDefault();
+                return contacts;
+            }
+        }
         #region Услуги
         public List<ModelServices> GetServicesList(Language lang)
         {

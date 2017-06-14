@@ -39,6 +39,9 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
         onOk: function () {
             var
                     dialog = this,
+                    video_container = new CKEDITOR.dom.element('div'),
+                    video_responsive = new CKEDITOR.dom.element('div'),
+
                     div_container = new CKEDITOR.dom.element('div'),
                     css = 'videoEmbed';
             // Set custom css class name
@@ -46,6 +49,8 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
                 css = dialog.getValueOf('tab-basic', 'css_class');
             }
             div_container.setAttribute('class', css);
+            video_container.setAttribute('class', 'news-video');
+            video_responsive.setAttribute('class', 'embed-responsive embed-responsive-16by9');
 
             // Auto-detect if youtube, vimeo or dailymotion url
             var url = detect(dialog.getValueOf('tab-basic', 'url_video'));
@@ -53,7 +58,10 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
             if (url.length > 1) {
                 var iframe = new CKEDITOR.dom.element.createFromHtml('<iframe frameborder="0" width="820" height="461" src="' + url + '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
                 div_container.append(iframe);
-                editor.insertElement(div_container);
+
+                video_responsive.append(div_container);
+                video_container.append(video_responsive);
+                editor.insertElement(video_container);
             }
         }
     };

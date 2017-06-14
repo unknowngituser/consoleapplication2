@@ -318,8 +318,16 @@
 						}
 
 						var element = CKEDITOR.dom.element.createFromHtml(content);
+
+					    video_container = new CKEDITOR.dom.element('div');
+					    video_responsive = new CKEDITOR.dom.element('div');
+					    video_container.setAttribute('class', 'news-video');
+					    video_responsive.setAttribute('class', 'embed-responsive embed-responsive-16by9');
+					    video_responsive.append(element);
+					    video_container.append(video_responsive);
+
 						var instance = this.getParentEditor();
-						instance.insertElement(element);
+						instance.insertElement(video_container);
 					}
 				};
 			});

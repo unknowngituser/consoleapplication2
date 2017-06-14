@@ -12,6 +12,7 @@
 
 .cafe-logo{
     top:10px;
+    text-align: center;
 }
 
 .cafe-link-block .cafe-text{
@@ -262,7 +263,7 @@ img.map-clock {
 }
 
 .map-contacts{
-    padding-top:25px;
+    padding-top:0;
     padding-right: 13px;
     text-align:right;
 }
@@ -297,10 +298,19 @@ img.map-clock {
         max-width: 70%;
         margin: 0 auto;
     }
-    div.google-maps {
-        padding-bottom: 55%;
+    .news-video {
+        max-width: 70%;
+        margin: 0 auto;
     }
-    
+    div.google-maps {
+        padding-bottom: 58%;
+    }
+    .contacts-block {
+        padding-left: 0;
+    }
+    .cafe-link-block .cafe-text h2 {
+        font-size: 3.7em;
+    }
 }
 
 @media (max-width: 768px) {
@@ -320,6 +330,7 @@ img.map-clock {
         max-width: 30px !important;
     }
     .map-contacts {
+        padding-top: 25px;
         padding-right: 0;
     }
     .map-contacts p {
@@ -347,4 +358,10 @@ img.map-clock {
     .slider-text {
         font-size: 5vmin;
     }
+}
+@media (min-width: 550px) and (max-width: 993px)  {
+    .full-width-img img {
+        max-width: 70% !important;
+    }
+    
 }

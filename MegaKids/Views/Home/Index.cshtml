@@ -39,11 +39,11 @@
 <!-- Блок с новостями -->
 <div class="container full-width-img">
     <div class="home-last-news-head">
-        <div class="left-hand"></div>
+        @*<div class="left-hand"></div>*@
         <h2>
             @Resource.RecentNews
         </h2>
-        <div class="right-hand"></div>
+        @*<div class="right-hand"></div>*@
     </div>
     @Html.Action("PartialRecentNews", "home", new { count = 4 })
     <div class="clear"></div>
@@ -64,5 +64,5 @@
 </div>
 <!-- Конец блок с видео -->
 <div class="white-delimiter"></div>
-@Html.Partial("_mapContacts")
+@Html.Action("_mapContacts","About")
 <div class="white-delimiter"></div>
